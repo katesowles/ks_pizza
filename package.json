@@ -1,0 +1,20 @@
+{
+  "name": "code-demo",
+  "version": "1.0.0",
+  "description": "code demo ========",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp watch-mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-sass": "^2.2.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "jshint": "^2.9.1",
+    "mocha": "^2.3.4",
+    "nodemon": "^1.8.1"
+  }
+}
