@@ -49,24 +49,25 @@ var my = {
     deliveryResult = 0;
     if (pizzaResult == 0) { // when pizza = 0, make the deliveries needed 0
       deliveryResult = 0;
-      console.log("Modified Deliveries (when pizza = 0, deliveries = 0): " + deliveryResult);
+      console.log("MODIFIED: when pizza = 0, deliveries = 0: " + deliveryResult);
       return deliveryResult;
     }
-    else if (pizzaResult >= shops.delRange[y][0]) { // when there are more pizzas baked than the minimum deliveries, make the # deliveries a new minimum of 1
+    // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
+    else if (shops.delRange[y][1] > pizzaResult) {
       deliveryResult = random(1, pizzaResult);
-      console.log("Modified Deliveries (when max is more than number of pizzas made): " + deliveryResult);
+      console.log("MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
       return deliveryResult;
     }
-    else if (pizzaResult < shops.delRange[y][0]) {
+    // if there are more than zero pizzas, make sure the delivery minimum is at least one
+    else if (pizzaResult > 0) {
       deliveryResult = random(1, pizzaResult);
-      console.log("Modified Deliveries (when min is less than number of pizzas made): " + deliveryResult);
-      return deliveryResult;
+      console.log("MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
+    }
+    else if (deliveryResult > pizzaResult) {
+      console.error("ruh roh shaggy, there are too many deliveries!");
     }
     else {
       console.error("the fuck did you do?");
-    }
-    if (deliveryResult > pizzaResult) {
-      console.error("ruh roh shaggy, there are too many deliveries!");
     }
   },
   drivers : function(z) {
