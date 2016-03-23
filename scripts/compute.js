@@ -4,19 +4,22 @@ var shops = {
   location : ["Beaverton", "Hillsboro", "Downtown", "Northeast", "Clackamas", "Airport"],
   pieRange : [[0,4], [0,7], [2,15], [15,35], [12,31], [5,20]],
   delRange : [[0,4], [0,4], [1,4], [3,8], [5,12], [6,11]],
-  Pizzas : function(i) {
-    var result = Math.floor(Math.random() * (this.pieRange[i][1] - this.pieRange[i][0])) + this.pieRange[i][0];
-    return result;
+  pizzas : function(min,max) {
+    var pizzaResult = Math.floor(Math.random() * (max - min)) + min;
+    return pizzaResult;
   },
-  Deliveries : function(i) {
-    var result = Math.floor(Math.random() * (this.delRange[i][1] - this.delRange[i][0])) + this.delRange[i][0];
-    return result;
+  deliveries : function(min,max) {
+    var deliveryResult = Math.floor(Math.random() * (max - min)) + min;
+    return deliveryResult;
   },
-  Drivers : function(i) {
-    var result = Math.ceil(pizzas(i)/3);
-    return result;
+  drivers : function(i) {
+    var driversResult = Math.ceil(pizzas(i)/3);
+    return driversResult;
   }
 };
+
+console.log(shops.pizzas(shops.pieRange[0][0],shops.pieRange[0][1]));
+console.log(shops.deliveries(shops.delRange[0][0],shops.delRange[0][1]));
 
 
 /**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -112,18 +115,18 @@ for (i = 0; i < shops.location.length; i++) {
 
   // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
   var numPizzas = document.createElement("td");
-  var numPizzasText = document.createTextNode("test");
+  var numPizzasText = document.createTextNode("test # pizzas");
   numPizzas.appendChild(numPizzasText);
   row.appendChild(numPizzas);
 
   // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
   var numDeliveries = document.createElement("td");
-  var numDeliveriesText = document.createTextNode("test");
+  var numDeliveriesText = document.createTextNode("test # deliveries");
   numDeliveries.appendChild(numDeliveriesText);
   row.appendChild(numDeliveries);
 
   var numDrivers = document.createElement("td");
-  var numDriversText = document.createTextNode("test");
+  var numDriversText = document.createTextNode("test # drivers");
   numDrivers.appendChild(numDriversText);
   row.appendChild(numDrivers);
 

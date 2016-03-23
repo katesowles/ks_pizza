@@ -7,7 +7,6 @@
 
 body {
   background-color: #eee;
-  padding: 50px;
   color: #333;
 }
 
@@ -16,29 +15,90 @@ header {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px;
+  padding: 27px;
   background-color: rgba(255,255,255,0.9);
 }
 
+.bannerImage {
+  background-image: url('https://scontent-sea1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10441150_10207649186419441_1321238285630022657_n.jpg?oh=bdda590a02174694a365bb875be5f866&oe=574D1383') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
+  background-position: static;
+  background-size: cover;
+  height: 600px;
+}
+
+.container, .locations {
+  padding: 50px;
+}
+
+.container {
+  padding-top: 250px;
+  width: 30%;
+}
+
+.locations {
+  /*white-space: nowrap;*/
+}
+
+.col6 {
+  width: 14.6%;
+  display: inline-block;
+  margin: 50px 1%;
+  text-align: center;
+  vertical-align: top;
+  position: relative;
+}
+
+.col6::before {
+  content: "";
+  background-image: url('../images/pin.png');
+  opacity: 0.6;
+  background-size: 30px auto;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -30px;
+  left: calc(50% - 15px);
+  z-index: 100;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  /*font-family: "Playfair Display", Times, serif;*/
   text-align: center;
 }
 
 h1 {
   font-size: 55px;
   font-weight: 200;
+  line-height: 1em;
 }
 
 h2 {
   font-size: 34px;
   font-weight: 500;
+  line-height: 1em;
 }
 
-hr {
-  /*border: 1px solid #eee;
-  margin: 50px 0;*/
-  display: none;
+h3 {
+  font-size: 34px;
+  margin-bottom: 80px;
+}
+
+.container p {
+  font-size: 60px;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.1em;
+}
+
+.container p span {
+  font-size: 89px;
+  display: block;
+  line-height: 1em;
+}
+
+h6 {
+  font-size: 20px;
 }
 
 .btn {
@@ -63,7 +123,7 @@ hr {
   width: 585px;
   padding: 30px;
   background-color: #fff;
-  margin: 150px auto;
+  margin: 200px auto 50px auto;
 }
 
 table {
@@ -107,7 +167,7 @@ td:first-child {
   width: 150px;
 }
 
-td:nth-child(even) {
+tbody tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
@@ -117,4 +177,36 @@ td:last-child, th:last-child {
 
 tr:last-child td {
   border-bottom: none;
+}
+
+@media only screen and (max-width: 1500px) {
+    .container {
+        width: 50%;;
+    }
+    .col6 {
+      width: 30%;
+      margin: 50px 1.6%;
+    }
+}
+@media only screen and (max-width: 900px) {
+    .container {
+        width: 70%;
+    }
+    .col6 {
+      width: 40%;
+      margin: 50px 5%;
+    }
+}
+@media only screen and (max-width: 600px) {
+    .container {
+        width: 100%;
+    }
+    .container p {
+      font-size: 55px;
+    }
+    .col6 {
+      width: 100%;
+      margin-left: 0px;
+      margin-right: 0px;
+    }
 }
