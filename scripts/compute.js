@@ -4,14 +4,17 @@ var shops = {
   location : ["Beaverton", "Hillsboro", "Downtown", "Northeast", "Clackamas", "Airport"],
   pieRange : [[0,4], [0,7], [2,15], [15,35], [12,31], [5,20]],
   delRange : [[0,4], [0,4], [1,4], [3,8], [5,12], [6,11]],
-  randomPies : function(i) {
-    return Math.floor(Math.random() * (this.pieRange[i][1] - this.pieRange[i][0])) + this.pieRange[i][0];
+  Pizzas : function(i) {
+    var result = Math.floor(Math.random() * (this.pieRange[i][1] - this.pieRange[i][0])) + this.pieRange[i][0];
+    return result;
   },
-  randomDeliveries : function(i) {
-    return Math.floor(Math.random() * (this.delRange[i][1] - this.delRange[i][0])) + this.delRange[i][0];
+  Deliveries : function(i) {
+    var result = Math.floor(Math.random() * (this.delRange[i][1] - this.delRange[i][0])) + this.delRange[i][0];
+    return result;
   },
-  numberDrivers : function() {
-    //blah
+  Drivers : function(i) {
+    var result = Math.ceil(pizzas(i)/3);
+    return result;
   }
 };
 
@@ -81,21 +84,52 @@ for (i = 0; i < shops.location.length; i++) {
             var row = document.createElement("tr");
             tblBody.appendChild(row);
 
-            for (var l = 0; l < shops.colHeadings.length; l++) {
-              // Create a <td> element and a text node, make the text
-              // node the contents of the <td>, and put the <td> at
-              // the end of the table row
+//             for (var l = 0; l < shops.colHeadings.length; l++) {
+//
+//
+//               // creates the <td> and adds it the <tr>
+//               var cell = document.createElement("td");
+//               row.appendChild(cell);
+//
+//               // adds text to each cell
+//               var cellText = document.createTextNode("cell in row "+k+", column "+l);
+//               cell.appendChild(cellText);
+//             } // closes for (l) loop
+//           } // closes for (k) loop
+//
+//   };
+//   generate_table()
+// }
 
-              // creates the <td> and adds it the <tr>
-              var cell = document.createElement("td");
-              row.appendChild(cell);
 
-              // adds text to each cell
-              var cellText = document.createTextNode("cell in row "+k+", column "+l);
-              cell.appendChild(cellText);
-            } // closes for (l) loop
-          } // closes for (k) loop
+/**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
-  };
-  generate_table()
+  // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
+  var timeCell = document.createElement("td");
+  var timeCellText = document.createTextNode(shops.timeBlocks[k]);
+  timeCell.appendChild(timeCellText);
+  row.appendChild(timeCell);
+
+  // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
+  var numPizzas = document.createElement("td");
+  var numPizzasText = document.createTextNode("test");
+  numPizzas.appendChild(numPizzasText);
+  row.appendChild(numPizzas);
+
+  // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
+  var numDeliveries = document.createElement("td");
+  var numDeliveriesText = document.createTextNode("test");
+  numDeliveries.appendChild(numDeliveriesText);
+  row.appendChild(numDeliveries);
+
+  var numDrivers = document.createElement("td");
+  var numDriversText = document.createTextNode("test");
+  numDrivers.appendChild(numDriversText);
+  row.appendChild(numDrivers);
+
+
+} // closes for (k) loop
+
+};
+generate_table()
 }
