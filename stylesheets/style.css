@@ -20,10 +20,15 @@ header {
 }
 
 .bannerImage {
-  background-image: url('https://scontent-sea1-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/10441150_10207649186419441_1321238285630022657_n.jpg?oh=bdda590a02174694a365bb875be5f866&oe=574D1383') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
+  background-image: url('http://troppa-nl.com/wp-content/uploads/2015/08/pizza-stock.jpg') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
   background-position: static;
   background-size: cover;
   height: 600px;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,0.4);
+  height: 100%;
 }
 
 .container, .locations {
@@ -178,6 +183,20 @@ td:last-child, th:last-child {
 tr:last-child td {
   border-bottom: none;
 }
+
+
+nav {
+  margin: 0 auto;
+}
+
+
+nav a {
+  text-align: center;
+  color: #333;
+  text-decoration: none;
+  width: 150px;
+}
+
 
 @media only screen and (max-width: 1500px) {
     .container {
