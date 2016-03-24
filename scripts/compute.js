@@ -94,6 +94,7 @@ console.log("----------------------------------------------------------");
 for (i = 0; i < shops.location.length; i++) {
 
   function generate_table() {
+
       // get the reference for where you want the table placed
       var body = document.getElementsByTagName("body")[0];
 
@@ -159,6 +160,7 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
+                  numPizzas.className = 'pizzaReults'
               pizzaCounter = pizzaCounter + pizzaResult;
               var numPizzasText = document.createTextNode(pizzaResult);
               numPizzas.appendChild(numPizzasText);
@@ -182,8 +184,17 @@ for (i = 0; i < shops.location.length; i++) {
 
           };
 
+          if( document.getElementById('counterSpan') ) {
+            var counterOutput = document.getElementById("counterSpan");
+            counterOutput.appendChild(numPizzasText);            
+          }
+
+
 };
 
 generate_table();
 
 };
+
+
+
