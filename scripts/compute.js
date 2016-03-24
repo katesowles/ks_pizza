@@ -1,6 +1,8 @@
 var pizzaResult;
 var deliveryResult;
 var driversResult;
+var pizzaCounter = 0;
+var wrapper;
 
 function random(min,max) {
   var randomResult = Math.floor(Math.random() * ((max - min) + 1) + min);
@@ -18,29 +20,29 @@ var shops = {
 var my = {
   pizzas : function(x) {
     pizzaResult = random(shops.pieRange[x][0],shops.pieRange[x][1]);
-    console.log("# Pizzas: " + pizzaResult);
+    // console.log("# Pizzas: " + pizzaResult);
     return pizzaResult;
   },
   deliveries : function(y) {
     this.pizzas(y);
-    console.log("# Pizzas: " + pizzaResult);
-    console.log("Potential Deliveries: " + shops.delRange[y][1]);
+    // console.log("# Pizzas: " + pizzaResult);
+    // console.log("Potential Deliveries: " + shops.delRange[y][1]);
     deliveryResult = 0;
     if (pizzaResult == 0) { // when pizza = 0, make the deliveries needed 0
       deliveryResult = 0;
-      console.log("MODIFIED: when pizza = 0, deliveries = 0");
+      // console.log("MODIFIED: when pizza = 0, deliveries = 0");
       return deliveryResult;
     }
     // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
     else if (shops.delRange[y][1] > pizzaResult) {
       deliveryResult = random(1, pizzaResult);
-      console.log("MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
+      // console.log("MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
       return deliveryResult;
     }
     // if there are more than zero pizzas, make sure the delivery minimum is at least one
     else if (pizzaResult > 0) {
       deliveryResult = random(1, pizzaResult);
-      console.log("MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
+      // console.log("MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
       return deliveryResult;
     }
     else if (deliveryResult > pizzaResult) {
@@ -57,10 +59,10 @@ var my = {
     this.pizzas(z);
     this.deliveries(z);
     driversResult = 0;
-    console.log("# Pizzas: " + pizzaResult);
-    console.log("# Deliveries: " + deliveryResult);
+    // console.log("# Pizzas: " + pizzaResult);
+    // console.log("# Deliveries: " + deliveryResult);
     driversResult = Math.ceil(deliveryResult / 3);
-    console.log("DRIVER RESULT: " + driversResult);
+    // console.log("DRIVER RESULT: " + driversResult);
     return driversResult;
   }
 };
@@ -89,21 +91,17 @@ console.log("number of items in the colHeadings array: " + shops.colHeadings.len
 console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
 console.log("----------------------------------------------------------");
 
-
-/**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-
-
-
-
 for (i = 0; i < shops.location.length; i++) {
 
   function generate_table() {
       // get the reference for where you want the table placed
-      var tblWrapper = document.getElementsByClassName("tableWrapper")[0];
+      var body = document.getElementsByTagName("body")[0];
 
-      // creates <table> and puts it in TableWrapper
+      var wrapper = document.getElementById("tableWrapper");
+
+      // creates <table> and puts it in tableWrapper
       var tbl = document.createElement("table");
-        tblWrapper.appendChild(tbl);
+        wrapper.appendChild(tbl);
 
         // creates <thead> and puts it in <table>
         var tblHead = document.createElement("thead");
@@ -161,12 +159,12 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
-
+              pizzaCounter = pizzaCounter + pizzaResult;
               var numPizzasText = document.createTextNode(pizzaResult);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
 
-              console.log(pizzaResult);
+              // console.log(pizzaResult);
 
               // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
               var numDeliveries = document.createElement("td");
@@ -174,7 +172,7 @@ for (i = 0; i < shops.location.length; i++) {
               numDeliveries.appendChild(numDeliveriesText);
               row.appendChild(numDeliveries);
 
-              console.log(deliveryResult);
+              // console.log(deliveryResult);
 
               // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
               var numDrivers = document.createElement("td");
@@ -182,54 +180,10 @@ for (i = 0; i < shops.location.length; i++) {
               numDrivers.appendChild(numDriversText);
               row.appendChild(numDrivers);
 
-/**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+          };
 
-
-          //     // creating all cells within the <tbody>
-          //     for (k = 0; k < shops.timeBlocks.length; k++) {
-          //
-          //       // creates a <tr> and adds it to <tbody>
-          //       var row = document.createElement("tr");
-          //
-          //       // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
-          //       var timeCell = document.createElement("td");
-          //       var timeCellText = document.createTextNode(shops.timeBlocks[k]);
-          //       timeCell.appendChild(timeCellText);
-          //       row.appendChild(timeCell);
-          //
-          //       // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
-          //       var cell = document.createElement("td");
-          //       var cellText = document.createTextNode(pizzaResult);
-          //       cell.appendChild(cellText);
-          //       row.appendChild(cell);
-          //
-          //       console.log(pizzaResult);
-          //
-          //       // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
-          //       var cell = document.createElement("td");
-          //       var cellText = document.createTextNode(deliveryResult);
-          //       cell.appendChild(cellText);
-          //       row.appendChild(cell);
-          //
-          //       console.log(deliveryResult);
-          //
-          //       // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
-          //
-          //       var cell = document.createElement("td");
-          //       var cellText = document.createTextNode(my.drivers(i));
-          //       cell.appendChild(cellText);
-          //       row.appendChild(cell);
-          //
-          //       console.log(my.drivers(i));
-          //
-          //
-          //
-          //
-          //
-          // } // closes for (k) loop
-          // tblBody.appendChild(row);
 };
-  };
 
-generate_table()
+generate_table();
+
 };

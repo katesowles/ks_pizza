@@ -6,20 +6,25 @@
     <link rel="stylesheet" href="stylesheets/style.css">
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic|Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
   </head>
-  <body>
+  <body id="home">
     <header>
-      <h1>Pizza3001</h1>
-      <h2>Welcome</h2>
+      <h1><em>Pizza</em>3001</h1>
     </header>
     <div class="bannerImage">
       <div class="overlay">
         <div class="container">
-          <p><span>NNN</span> happy pizza odysseys this week!</p>
+          <p><span id="counterSpan"></span> happy pizza odysseys this week!</p>
+            <script type="text/javascript">
+            var exports = {};
+            var counterOutput = document.getElementById("counterSpan");
+            counterOutput.textContent = "number" // I cannot, for the life of me get both my tables on the Sales Data page AND this number counter to work, even if I add this script at the bottom of my compute.js file. Not sure how I keep breaking things so expertly.
+            </script>
         </div>
       </div>
     </div>
     <div class="locations">
       <h3>Locations</h3>
+      <h4>All locations open 8am - 2am, 7 days a week</h4>
       <div class="col6">
         <h6>Beaverton</h6>
         <address>
@@ -63,5 +68,6 @@
         <a href="sales-dataTEST.html" class="btn">Sales Data</a>
       </nav>
     </footer>
+    <script src="scripts/compute.js"></script>
   </body>
 </html>

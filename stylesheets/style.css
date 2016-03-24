@@ -10,12 +10,16 @@ body {
   color: #333;
 }
 
+body#home table {
+  display: none;
+}
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 27px;
+  padding: 25px;
   background-color: rgba(255,255,255,0.9);
 }
 
@@ -23,7 +27,7 @@ header {
   background-image: url('http://troppa-nl.com/wp-content/uploads/2015/08/pizza-stock.jpg') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
   background-position: static;
   background-size: cover;
-  height: 600px;
+  height: 800px;
 }
 
 .overlay {
@@ -37,7 +41,22 @@ header {
 
 .container {
   padding-top: 250px;
-  width: 30%;
+  width: 50%;
+}
+
+.container p {
+  font-size: 80px;
+  font-weight: 800;
+  color: white;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.1em;
+}
+
+.container #counterSpan {
+  font-size: 120px;
+  display: block;
+  line-height: 1em;
 }
 
 .locations {
@@ -76,6 +95,11 @@ h1 {
   line-height: 1em;
 }
 
+h1 em {
+  font-weight: 400;
+  font-style: normal;
+}
+
 h2 {
   font-size: 34px;
   font-weight: 500;
@@ -84,22 +108,16 @@ h2 {
 
 h3 {
   font-size: 34px;
-  margin-bottom: 80px;
+  margin-bottom: 30px;
 }
 
-.container p {
-  font-size: 60px;
-  font-weight: 800;
-  color: white;
+h4 {
+  padding: 10px;
   text-transform: uppercase;
-  text-align: left;
-  line-height: 1.1em;
-}
-
-.container p span {
-  font-size: 89px;
-  display: block;
-  line-height: 1em;
+  background-color: rgba(152,204,0,.5);
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
 
 h6 {
@@ -124,7 +142,7 @@ h6 {
   color: #999;
 }
 
-.tableWrapper {
+#tableWrapper {
   width: 585px;
   padding: 30px;
   background-color: #fff;
@@ -184,11 +202,9 @@ tr:last-child td {
   border-bottom: none;
 }
 
-
 nav {
   margin: 0 auto;
 }
-
 
 nav a {
   text-align: center;
@@ -197,31 +213,40 @@ nav a {
   width: 150px;
 }
 
-
-@media only screen and (max-width: 1500px) {
+@media only screen and (max-width: 1600px) {
     .container {
         width: 50%;;
+        padding-top: 250px;
     }
     .col6 {
       width: 30%;
       margin: 50px 1.6%;
     }
 }
-@media only screen and (max-width: 900px) {
+
+@media only screen and (max-width: 1000px) {
     .container {
-        width: 70%;
+        width: 100%;
+        padding-top: 250px;
     }
     .col6 {
       width: 40%;
       margin: 50px 5%;
     }
 }
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 700px) {
+    .bannerImage {
+      height: 625px;
+    }
     .container {
         width: 100%;
+        padding-top: 160px;
+
     }
     .container p {
       font-size: 55px;
+      text-align: center;
     }
     .col6 {
       width: 100%;
