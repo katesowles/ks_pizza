@@ -1,7 +1,9 @@
 var pizzaResult;
 var deliveryResult;
 var driversResult;
+// var pizzaCounter = 0;
 var pizzaCounter = 0;
+var countArray = [];
 var wrapper;
 
 function random(min,max) {
@@ -67,29 +69,29 @@ var my = {
   }
 };
 
-console.log("---------------------- START TESTING ---------------------");
-console.log("BLOCK ONE Pizza Min/Max (should be between 0-4):    " + random(shops.pieRange[0][0],shops.pieRange[0][1]));
-console.log("BLOCK ONE Delivery Min/Max (should be between 0-4): " + random(shops.delRange[0][0],shops.delRange[0][1]));
-console.log("----------------------------------------------------------");
-console.log("BLOCK TWO Pizza Min/Max (should be between 0-7):    " + random(shops.pieRange[1][0],shops.pieRange[1][1]));
-console.log("BLOCK TWO Delivery Min/Max (should be between 0-4): " + random(shops.delRange[1][0],shops.delRange[1][1]));
-console.log("----------------------------------------------------------");
-console.log("BLOCK THREE Pizza Min/Max (should be between 2-15):   " + random(shops.pieRange[2][0],shops.pieRange[2][1]));
-console.log("BLOCK THREE Delivery Min/Max (should be between 1-4): " + random(shops.delRange[2][0],shops.delRange[2][1]));
-console.log("----------------------------------------------------------");
-console.log("BLOCK FOUR Pizza Min/Max (should be between 15-35):  " + random(shops.pieRange[3][0],shops.pieRange[3][1]));
-console.log("BLOCK FOUR Delivery Min/Max (should be between 3-8): " + random(shops.delRange[3][0],shops.delRange[3][1]));
-console.log("----------------------------------------------------------");
-console.log("BLOCK FIVE Pizza Min/Max (should be between 12-31):   " + random(shops.pieRange[4][0],shops.pieRange[4][1]));
-console.log("BLOCK FIVE Delivery Min/Max (should be between 5-12): " + random(shops.delRange[4][0],shops.delRange[4][1]));
-console.log("----------------------------------------------------------");
-console.log("BLOCK SIX Pizza Min/Max (should be between 5-20):    " + random(shops.pieRange[5][0],shops.pieRange[5][1]));
-console.log("BLOCK SIX Delivery Min/Max (should be between 6-11): " + random(shops.delRange[5][0],shops.delRange[5][1]));
-console.log("---------------------- END TESTING -----------------------");
-console.log("number of items in the location array: " + shops.location.length);
-console.log("number of items in the colHeadings array: " + shops.colHeadings.length);
-console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
-console.log("----------------------------------------------------------");
+// console.log("---------------------- START TESTING ---------------------");
+// console.log("BLOCK ONE Pizza Min/Max (should be between 0-4):    " + random(shops.pieRange[0][0],shops.pieRange[0][1]));
+// console.log("BLOCK ONE Delivery Min/Max (should be between 0-4): " + random(shops.delRange[0][0],shops.delRange[0][1]));
+// console.log("----------------------------------------------------------");
+// console.log("BLOCK TWO Pizza Min/Max (should be between 0-7):    " + random(shops.pieRange[1][0],shops.pieRange[1][1]));
+// console.log("BLOCK TWO Delivery Min/Max (should be between 0-4): " + random(shops.delRange[1][0],shops.delRange[1][1]));
+// console.log("----------------------------------------------------------");
+// console.log("BLOCK THREE Pizza Min/Max (should be between 2-15):   " + random(shops.pieRange[2][0],shops.pieRange[2][1]));
+// console.log("BLOCK THREE Delivery Min/Max (should be between 1-4): " + random(shops.delRange[2][0],shops.delRange[2][1]));
+// console.log("----------------------------------------------------------");
+// console.log("BLOCK FOUR Pizza Min/Max (should be between 15-35):  " + random(shops.pieRange[3][0],shops.pieRange[3][1]));
+// console.log("BLOCK FOUR Delivery Min/Max (should be between 3-8): " + random(shops.delRange[3][0],shops.delRange[3][1]));
+// console.log("----------------------------------------------------------");
+// console.log("BLOCK FIVE Pizza Min/Max (should be between 12-31):   " + random(shops.pieRange[4][0],shops.pieRange[4][1]));
+// console.log("BLOCK FIVE Delivery Min/Max (should be between 5-12): " + random(shops.delRange[4][0],shops.delRange[4][1]));
+// console.log("----------------------------------------------------------");
+// console.log("BLOCK SIX Pizza Min/Max (should be between 5-20):    " + random(shops.pieRange[5][0],shops.pieRange[5][1]));
+// console.log("BLOCK SIX Delivery Min/Max (should be between 6-11): " + random(shops.delRange[5][0],shops.delRange[5][1]));
+// console.log("---------------------- END TESTING -----------------------");
+// console.log("number of items in the location array: " + shops.location.length);
+// console.log("number of items in the colHeadings array: " + shops.colHeadings.length);
+// console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
+// console.log("----------------------------------------------------------");
 
 for (i = 0; i < shops.location.length; i++) {
 
@@ -160,11 +162,13 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
-                  numPizzas.className = 'pizzaReults'
-              pizzaCounter = pizzaCounter + pizzaResult;
+              numPizzas.className = 'pizzaResults';
+              pizzaCounter = pizzaResult;
               var numPizzasText = document.createTextNode(pizzaResult);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
+
+              countArray.push(pizzaResult);
 
               // console.log(pizzaResult);
 
@@ -184,17 +188,16 @@ for (i = 0; i < shops.location.length; i++) {
 
           };
 
-          if( document.getElementById('counterSpan') ) {
-            var counterOutput = document.getElementById("counterSpan");
-            counterOutput.appendChild(numPizzasText);            
-          }
-
-
 };
 
 generate_table();
-
 };
 
+console.log(countArray);
+var myTotal = countArray.reduce(function(a,b) {return a+b;});
+console.log(myTotal);
 
-
+var counterOutput = document.getElementById("counterSpan");
+if( document.getElementById("counterSpan") ) {
+  counterOutput.textContent = myTotal;
+}
