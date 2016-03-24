@@ -11,8 +11,8 @@ var shops = {
   colHeadings : ["Time", "# Pizzas", "# Deliveries", "# Drivers"],
   timeBlocks : ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 11:59am", "12:00 - 12:59pm", "1:00 - 1:59pm", "2:00 - 2:59pm", "3:00 - 3:59pm", "4:00 - 4:59pm", "5:00 - 5:59pm", "6:00 - 6:59pm", "7:00 - 7:59pm", "8:00 - 8:59pm", "9:00 - 9:59pm", "10:00 - 10:59pm", "11:00 - 11:59pm", "12:00 - 12:59am", "1:00 - 1:59am"],
   location : ["Beaverton", "Hillsboro", "Downtown", "Northeast", "Clackamas", "Airport"],
-  pieRange : [[0,4], [0,7], [2,15], [15,35], [12,31], [5,20]],
-  delRange : [[0,4], [0,4], [1,4], [3,8], [5,12], [6,11]],
+  pieRange : [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
+  delRange : [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]],
 };
 
 var my = {
@@ -65,29 +65,29 @@ var my = {
   }
 };
 
-// console.log("---------------------- START TESTING ---------------------");
-// console.log("BLOCK ONE Pizza Min/Max (should be between 0-4):    " + random(shops.pieRange[0][0],shops.pieRange[0][1]));
-// console.log("BLOCK ONE Delivery Min/Max (should be between 0-4): " + random(shops.delRange[0][0],shops.delRange[0][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK TWO Pizza Min/Max (should be between 0-7):    " + random(shops.pieRange[1][0],shops.pieRange[1][1]));
-// console.log("BLOCK TWO Delivery Min/Max (should be between 0-4): " + random(shops.delRange[1][0],shops.delRange[1][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK THREE Pizza Min/Max (should be between 2-15):   " + random(shops.pieRange[2][0],shops.pieRange[2][1]));
-// console.log("BLOCK THREE Delivery Min/Max (should be between 1-4): " + random(shops.delRange[2][0],shops.delRange[2][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK FOUR Pizza Min/Max (should be between 15-35):  " + random(shops.pieRange[3][0],shops.pieRange[3][1]));
-// console.log("BLOCK FOUR Delivery Min/Max (should be between 3-8): " + random(shops.delRange[3][0],shops.delRange[3][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK FIVE Pizza Min/Max (should be between 12-31):   " + random(shops.pieRange[4][0],shops.pieRange[4][1]));
-// console.log("BLOCK FIVE Delivery Min/Max (should be between 5-12): " + random(shops.delRange[4][0],shops.delRange[4][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK SIX Pizza Min/Max (should be between 5-20):    " + random(shops.pieRange[5][0],shops.pieRange[5][1]));
-// console.log("BLOCK SIX Delivery Min/Max (should be between 6-11): " + random(shops.delRange[5][0],shops.delRange[5][1]));
-// console.log("---------------------- END TESTING -----------------------");
-// console.log("number of items in the location array: " + shops.location.length);
-// console.log("number of items in the colHeadings array: " + shops.colHeadings.length);
-// console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
-// console.log("----------------------------------------------------------");
+console.log("---------------------- START TESTING ---------------------");
+console.log("BLOCK ONE Pizza Min/Max (should be between 0-4):    " + random(shops.pieRange[0][0],shops.pieRange[0][1]));
+console.log("BLOCK ONE Delivery Min/Max (should be between 0-4): " + random(shops.delRange[0][0],shops.delRange[0][1]));
+console.log("----------------------------------------------------------");
+console.log("BLOCK TWO Pizza Min/Max (should be between 0-7):    " + random(shops.pieRange[1][0],shops.pieRange[1][1]));
+console.log("BLOCK TWO Delivery Min/Max (should be between 0-4): " + random(shops.delRange[1][0],shops.delRange[1][1]));
+console.log("----------------------------------------------------------");
+console.log("BLOCK THREE Pizza Min/Max (should be between 2-15):   " + random(shops.pieRange[2][0],shops.pieRange[2][1]));
+console.log("BLOCK THREE Delivery Min/Max (should be between 1-4): " + random(shops.delRange[2][0],shops.delRange[2][1]));
+console.log("----------------------------------------------------------");
+console.log("BLOCK FOUR Pizza Min/Max (should be between 15-35):  " + random(shops.pieRange[3][0],shops.pieRange[3][1]));
+console.log("BLOCK FOUR Delivery Min/Max (should be between 3-8): " + random(shops.delRange[3][0],shops.delRange[3][1]));
+console.log("----------------------------------------------------------");
+console.log("BLOCK FIVE Pizza Min/Max (should be between 12-31):   " + random(shops.pieRange[4][0],shops.pieRange[4][1]));
+console.log("BLOCK FIVE Delivery Min/Max (should be between 5-12): " + random(shops.delRange[4][0],shops.delRange[4][1]));
+console.log("----------------------------------------------------------");
+console.log("BLOCK SIX Pizza Min/Max (should be between 5-20):    " + random(shops.pieRange[5][0],shops.pieRange[5][1]));
+console.log("BLOCK SIX Delivery Min/Max (should be between 6-11): " + random(shops.delRange[5][0],shops.delRange[5][1]));
+console.log("---------------------- END TESTING -----------------------");
+console.log("number of items in the location array: " + shops.location.length);
+console.log("number of items in the colHeadings array: " + shops.colHeadings.length);
+console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
+console.log("----------------------------------------------------------");
 
 
 /**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -147,39 +147,11 @@ for (i = 0; i < shops.location.length; i++) {
           // creating all cells within the <tbody>
           for (k = 0; k < shops.timeBlocks.length; k++) {
 
+            var numDriversText = document.createTextNode(my.drivers(k));
+
             // creates a <tr> and adds it to <tbody>
             var row = document.createElement("tr");
             tblBody.appendChild(row);
-
-              // // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
-              // var timeCell = document.createElement("td");
-              // var timeCellText = document.createTextNode(shops.timeBlocks[k]);
-              // timeCell.appendChild(timeCellText);
-              // row.appendChild(timeCell);
-              //
-              // // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
-              // var numPizzas = document.createElement("td");
-              // var numPizzasText = document.createTextNode(pizzaResult);
-              // numPizzas.appendChild(numPizzasText);
-              // row.appendChild(numPizzas);
-              //
-              // console.log(pizzaResult);
-              //
-              // // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
-              // var numDeliveries = document.createElement("td");
-              // var numDeliveriesText = document.createTextNode(deliveryResult);
-              // numDeliveries.appendChild(numDeliveriesText);
-              // row.appendChild(numDeliveries);
-              //
-              // console.log(deliveryResult);
-              //
-              // // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
-              // var numDrivers = document.createElement("td");
-              // var numDriversText = document.createTextNode(my.drivers(i));
-              // numDrivers.appendChild(numDriversText);
-              // row.appendChild(numDrivers);
-
-/**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
               // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
               var timeCell = document.createElement("td");
@@ -189,6 +161,7 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
+
               var numPizzasText = document.createTextNode(pizzaResult);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
@@ -205,32 +178,57 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
               var numDrivers = document.createElement("td");
-              var numDriversText = document.createTextNode(my.drivers(i));
+              // var numDriversText = document.createTextNode(my.drivers(i));
               numDrivers.appendChild(numDriversText);
               row.appendChild(numDrivers);
 
+/**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              // console.log(my.drivers(i));
-
-          } // closes for (k) loop
-
+          //     // creating all cells within the <tbody>
+          //     for (k = 0; k < shops.timeBlocks.length; k++) {
+          //
+          //       // creates a <tr> and adds it to <tbody>
+          //       var row = document.createElement("tr");
+          //
+          //       // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
+          //       var timeCell = document.createElement("td");
+          //       var timeCellText = document.createTextNode(shops.timeBlocks[k]);
+          //       timeCell.appendChild(timeCellText);
+          //       row.appendChild(timeCell);
+          //
+          //       // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
+          //       var cell = document.createElement("td");
+          //       var cellText = document.createTextNode(pizzaResult);
+          //       cell.appendChild(cellText);
+          //       row.appendChild(cell);
+          //
+          //       console.log(pizzaResult);
+          //
+          //       // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
+          //       var cell = document.createElement("td");
+          //       var cellText = document.createTextNode(deliveryResult);
+          //       cell.appendChild(cellText);
+          //       row.appendChild(cell);
+          //
+          //       console.log(deliveryResult);
+          //
+          //       // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
+          //
+          //       var cell = document.createElement("td");
+          //       var cellText = document.createTextNode(my.drivers(i));
+          //       cell.appendChild(cellText);
+          //       row.appendChild(cell);
+          //
+          //       console.log(my.drivers(i));
+          //
+          //
+          //
+          //
+          //
+          // } // closes for (k) loop
+          // tblBody.appendChild(row);
+};
   };
 
 generate_table()
