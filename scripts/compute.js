@@ -104,14 +104,15 @@ var colHeadings = ["Time", "# Pizzas", "# Deliveries", "# Drivers"];
 var timeBlocks = ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 11:59am", "12:00 - 12:59pm", "1:00 - 1:59pm", "2:00 - 2:59pm", "3:00 - 3:59pm", "4:00 - 4:59pm", "5:00 - 5:59pm", "6:00 - 6:59pm", "7:00 - 7:59pm", "8:00 - 8:59pm", "9:00 - 9:59pm", "10:00 - 10:59pm", "11:00 - 11:59pm", "12:00 - 12:59am", "1:00 - 1:59am"];
 var shops = [beaverton, hillsboro, downtown, northeast, clackamas, airport];
 var countArray = [];
-var perShopTotal = [];
 var allShopTotals = [];
-
 var shopTotal = [];
 var pizzaResult = [];
+
 var deliveryResult;
 var driversResult;
 var wrapper;
+var min;
+var max;
 
 /******************************************************************************/
 /************************** HERE LIES MY FRUSTRATION **************************/
