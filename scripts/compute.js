@@ -121,19 +121,37 @@ function random(min,max) {
 
 // THIS WAS THE ORIGNAL IDEA I HAD FOR HOW TO ACCOMPLISH THIS WITH PULLING THE PIERANGE AND DELRANGE FROM MY CONSTRUCTORS OBJECTS
 
-// function pizzas() {
-//   for (y = 0; y < universal.timeBlocks.length; y++) { // repeat for each row
-//     var pizzaTotal;
-//     min = universal.shops[0].pieRange[y][0]; //**refactor here to take individual shops
-//     max = universal.shops[0].pieRange[y][1]; //**refactor here to take individual shops
-//     random(min,max);
-//     console.log(pizzaTotal);
-//     return pizzaTotal;
-// pizzaResult.push(random(universal.shops[0].pieRange[y][0],universal.shops[0].pieRange[y][1])) ;
-//
-//   } // close the y loop
-//
-// } // close the pizzas function
+
+var pizzaResult = [];
+function pizzas(location) {
+  // for (x = 0; x < shops.length; x++) { // repeat for each shop
+    for (y = 0; y < timeBlocks.length; y++) { // repeat for each row
+      var pizzaTotal;
+
+      var min = location.pieRange[y][0]; //**refactor here to take individual shops
+      var max = location.pieRange[y][1]; //**refactor here to take individual shops
+
+      // console.log(min,max);
+
+      pizzaResult.push(random(min, max)) ;
+
+    } // close the y loop
+
+  // } // close the x loop
+} // close the pizzas function
+
+for (var jj = 0; jj < shops.length; jj++) {
+  pizzas(shops[jj])
+  console.log(pizzaResult);
+}
+ var shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+ // console.log("Shop Total: " +  shopTotal);
+ // allShopTotal.push(shopTotal);
+ // console.log(allShopTotal);
+
+
+
+// pizzas(shops[0])
 
 // ANOTHER IDEA, TRYING TO TAKE SOME OF THE LOOPS OUT OF THE FUNCTION...
 
