@@ -10,14 +10,10 @@ function lengthTest() {
   console.log("---------------------- END TESTING -----------------------");
 }
 function storeTest(x) {
-  // console.log("-------------------------------------------");
-  // console.log("STORE: " + universal.shops[x].location);
+
   for (y = 0; y < universal.timeBlocks.length; y++) { // repeat for each row
     var checkPieRange = [universal.shops[x].pieRange[y][0],universal.shops[x].pieRange[y][1]];
     var checkPieRandom = random(universal.shops[x].pieRange[y][0],universal.shops[x].pieRange[y][1]);
-      // console.log("----------------------------------------------------------");
-      // console.log("PIZZA RANGE: " + checkPieRange);
-      // console.log("PIZZA RANDOM: " + checkPieRandom);
     if (checkPieRandom > universal.shops[x].pieRange[y][1]) {
       console.alert("your pizza count is higher than the maximum");
     }
@@ -111,101 +107,14 @@ var countArray = [];
 var perShopTotal = [];
 var allShopTotals = [];
 
-var shopTotal;
+var shopTotal = [];
+var pizzaResult = [];
 var deliveryResult;
 var driversResult;
 var wrapper;
 
 /******************************************************************************/
 /************************** HERE LIES MY FRUSTRATION **************************/
-/******************************************************************************/
-
-// function pizzas(location) {
-//   var pizzaResult = [];
-//   var min;
-//   var max;
-//     for (y = 0; y < timeBlocks.length; y++) {
-//       min = location.pieRange[y][0];
-//       max = location.pieRange[y][1];
-//       pizzaResult.push(random(min, max));
-//     }
-//     var shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
-//     return shopTotal;
-// }
-// for(var x = 0; x < shops.length; x++) {
-//   console.log("daily total: ", pizzas(shops[x]));
-//   allShopTotals.push(pizzas(shops[x]));
-// }
-// console.log(allShopTotals);
-
-// add an array to each object to collect the per hour loops, and store those shop totals to one array in the object then switch the order of the loops when we append to the page to get the per hour totals across all stores
-// for (x = 0; x < shops.length; x++) {
-//
-//   function pizzas(location) { // should find the total per shop and push that to an  array
-//
-//       var pizzaResult;
-//       var shopTotal;
-//       var min;
-//       var max;
-//
-//       for (y = 0; y < timeBlocks.length; y++) { // repeat for each row in a table
-//
-//         var min = location.pieRange[y][0];
-//         var max = location.pieRange[y][1];
-//         shopTotal = random(min,max);
-//         location.dailyTotal.push(shopTotal);
-//         // console.log("per hour pizza: " + shopTotal);
-//         var perShopTotal = location.dailyTotal.reduce(function(a,b) {return a+b;});
-//       } // close the y loop
-//
-//       console.log("total per hour pizzas for this shop: " + perShopTotal);
-//
-//   } // close the pizzas function
-//     allShopTotals.push(pizzas(shops[0]));
-//   console.log("see allShopTotals: " + allShopTotals);
-//
-//   // allShopTotals.push(pizzas(shops[x]));
-//
-// } // close the x loop
-//
-// // console.log("Double Check: " + allShopTotals);
-// pizzas(shops[0]);
-
-// ANOTHER IDEA, TRYING TO TAKE SOME OF THE LOOPS OUT OF THE FUNCTION...
-
-// function pizzas(x) {
-//
-//     for (y = 0; y < timeBlocks.length; y++) { // repeat for each row
-//       min = shops[x].pieRange[y][0];
-//       max = shops[x].pieRange[y][1];
-//       pizzaResult = random(min,max);
-//       return pizzaResult;
-//     }
-//
-// }
-
-// THIS WAS MY SECOND ATTEMPT AT REFACTORING IT OUT STEP BY STEP (IE. CALCULATE THE RANDOM PIZZAS BAKED FOR A SINGLE TIME BLOCK, LOOP THAT PROCESS TO FIGURE OUT ALL THE TIME BLOCKS FOR THAT STORE, PUSH ALL THOSE VALUES TO AN ARRAY, REDUCE THE ARRAY AND PUSH TO A NEW ARRAY WHERE WE STORE EACH STORE'S TOTAL...) BUT NOW I'M GETTING AN UNDEFINED AND CAN'T FIGURE OUT WHERE IT'S COMING FROM.
-
-// var get = {
-//   pizza : function (x,y) { // calculates pizza totals for a single time slot for store x
-//     pizzaResultB = random(shops[x].pieRange[y][0], shops[x].pieRange[y][1]);
-//     return pizzaResultB;
-//   },
-//   shopTotals : function (x) { //
-//     for (y = 0; y < timeBlocks.length; y++) { // repeats along all the rows of a single table, push all those values to a storeTotal array, reduce that array and save to a new array that will store all store totals together
-//       this.pizza(x,y);
-//
-//       return ___;
-//     }
-//   },
-// }
-
-// pizzaResult.push(random(universal.shops[0].pieRange[y][0],universal.shops[0].pieRange[y][1])) ;
-// var shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
-
-
-/******************************************************************************/
-/****************************** OLD CALCULATIONS ******************************/
 /******************************************************************************/
 
 // pieRange = [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]];
