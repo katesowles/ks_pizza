@@ -103,72 +103,70 @@ var airport = new createShop (
 var colHeadings = ["Time", "# Pizzas", "# Deliveries", "# Drivers"];
 var timeBlocks = ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 11:59am", "12:00 - 12:59pm", "1:00 - 1:59pm", "2:00 - 2:59pm", "3:00 - 3:59pm", "4:00 - 4:59pm", "5:00 - 5:59pm", "6:00 - 6:59pm", "7:00 - 7:59pm", "8:00 - 8:59pm", "9:00 - 9:59pm", "10:00 - 10:59pm", "11:00 - 11:59pm", "12:00 - 12:59am", "1:00 - 1:59am"];
 var shops = [beaverton, hillsboro, downtown, northeast, clackamas, airport];
-var countArray = [];
-var allShopTotals = [];
-var shopTotal = [];
-var pizzaResult = [];
 
-var deliveryResult;
-var driversResult;
-var wrapper;
-var min;
-var max;
+var countArray = [];    // this array will hold the total count of pizzas, to be printed to index.html
+var allShopTotals = []; // this array will hold each shop's daily total, to be reduced and ported over countArray
+var shopTotal = [];     // this array will hold each shop's hourly totals, to be reduced...
+var pizzaResult = [];   // this will hold each shop's hourly totals while calculating...
+
+var deliveryResult;     // this will hold the calculated delivery results for each time block before it's pushed to that row in the respecitve table
+var driversResult;      // this will hold the calculated driver results for each time block before it's pushed to that row in the respecitve table
+var wrapper;            //
+var min;                // finds the minimum value for the
+var max;                //
 
 /******************************************************************************/
 /************************** HERE LIES MY FRUSTRATION **************************/
 /******************************************************************************/
 
-// pieRange = [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]];
-// delRange = [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]];
-
 var my = {
-  pizzas : function(shopLocation) {
+  pizzas : function(shopLocation) { // shopLocation = shops[x]
     var shopTotal = [];
     var pizzaResult = [];
     var min;
     var max;
-      for (y = 0; y < timeBlocks.length; y++) {
-        // console.log("min ",shopLocation.pieRange[y][0]);
-        // console.log("max ",shopLocation.pieRange[y][1]);
+      for (var y = 0; y < timeBlocks.length; y++) {
         min = shopLocation.pieRange[y][0];
         max = shopLocation.pieRange[y][1];
         pizzaResult.push(random(min, max));
       }
       shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+      console.log("shop total: " + shopTotal);
       return shopTotal;
   },
-  deliveries : function(y) {
-    this.pizzas(y);
-    // console.log("# Potential Deliveries: " + delRange[y][1]);
-    deliveryResult = 0;
-    if (shopTotal == 0) { // when pizza = 0, make the deliveries needed 0
+  deliveries : function(shopLocation) {
+    this.pizzas(shopLocation);
+
+    for (f = 0; f < timeBlocks.length; f++) {
       deliveryResult = 0;
-      // console.warn("# DELIVERIES MODIFIED: when pizza = 0, deliveries = 0");
+      if (shopTotal == 0) { // when pizza = 0, make the deliveries needed 0
+        deliveryResult = 0;
+        // console.warn("# DELIVERIES MODIFIED: when pizza = 0, deliveries = 0");
+        return deliveryResult;
+      }
+      else if (shopLocation.delRange[y][1] > shopTotal) { // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
+        deliveryResult = random(1, shopTotal);
+        // console.warn("# DELIVERIES MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
+        return deliveryResult;
+      }
+      else if (shopTotal > 0) { // if there are more than zero pizzas, make sure the delivery minimum is at least one
+        deliveryResult = random(1, shopTotal);
+        // console.warn("# DELIVERIES MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
+        return deliveryResult;
+      }
+      else if (deliveryResult > shopTotal) {
+        confirm("ruh roh shaggy, there are too many deliveries!");
+      }
+      else {
+        confirm("the fuck did you do?");
+      }
       return deliveryResult;
     }
-    // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
-    else if (delRange[y][1] > shopTotal) {
-      deliveryResult = random(1, shopTotal);
-      // console.warn("# DELIVERIES MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
-      return deliveryResult;
-    }
-    // if there are more than zero pizzas, make sure the delivery minimum is at least one
-    else if (shopTotal > 0) {
-      deliveryResult = random(1, shopTotal);
-      // console.warn("# DELIVERIES MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
-      return deliveryResult;
-    }
-    else if (deliveryResult > shopTotal) {
-      confirm("ruh roh shaggy, there are too many deliveries!");
-    }
-    else {
-      confirm("the fuck did you do?");
-    }
-    return deliveryResult;
+
   },
-  drivers : function(z) {
-    this.pizzas(z);
-    this.deliveries(z);
+  drivers : function(shopLocation) {
+    this.pizzas(shopLocation);
+    this.deliveries(shopLocation);
     driversResult = 0;
     // console.log("# Pizzas: " + pizzaResult);
     // console.log("# Deliveries: " + deliveryResult);
@@ -180,12 +178,30 @@ var my = {
 };
 
 for(var x = 0; x < shops.length; x++) {
-  console.log("daily total: ", my.pizzas(shops[x]));
   allShopTotals.push(my.pizzas(shops[x]));
 }
+
+// wtf = function(shopLocation) { // shopLocation = shops[x]
+//   var shopTotal = [];
+//   var pizzaResult = [];
+//   var min;
+//   var max;
+//     for (y = 0; y < timeBlocks.length; y++) {
+//       min = shopLocation.pieRange[y][0];
+//       max = shopLocation.pieRange[y][1];
+//       pizzaResult.push(random(min, max));
+//     }
+//     shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+//     console.log("shop total: " + shopTotal);
+//     return shopTotal;
+// }
+//
+// for(var x = 0; x < shops.length; x++) {
+//   allShopTotals.push(wtf(shops[0]));
+// }
 console.log(allShopTotals);
 
-
+// allShopTotals.push(my.pizzas(shops[0]));
 
 /******************************************************************************/
 /************************* APPENDING DATA TO THE PAGE *************************/
@@ -195,46 +211,36 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
 
   function generate_table() {
 
-      // get the reference for where you want the table placed
-      var body = document.getElementsByTagName("body")[0];
+      var body = document.getElementsByTagName("body")[0]; // get the reference for where you want the table placed
 
       var wrapper = document.getElementById("tableWrapper");
 
-      // creates <table> and puts it in tableWrapper
-      var tbl = document.createElement("table");
+      var tbl = document.createElement("table"); // creates <table> and puts it in tableWrapper
         wrapper.appendChild(tbl);
 
-        // creates <thead> and puts it in <table>
-        var tblHead = document.createElement("thead");
+        var tblHead = document.createElement("thead"); // creates <thead> and puts it in <table>
           tbl.appendChild(tblHead);
 
-          // creates the shopHead <tr> and puts it in <thead>
-          var shopHead = document.createElement("tr");
+          var shopHead = document.createElement("tr"); // creates the shopHead <tr> and puts it in <thead>
             tblHead.appendChild(shopHead);
 
-            // creates the <th> in the shopHead <tr>
-            var shopLoc = document.createElement("th");
-            // sets the colspan attribute of tbl to 4;
-            shopLoc.setAttribute("colspan", "4");
+            var shopLoc = document.createElement("th"); // creates the <th> in the shopHead <tr>
+            shopLoc.setAttribute("colspan", "4"); // sets the colspan attribute of tbl to 4;
             shopHead.appendChild(shopLoc);
 
-              // pulls the text for the shopLoc <th> from the universal.shops[i].locations array
-              var locName = document.createTextNode(shops[i].name);
+              var locName = document.createTextNode(shops[i].name); // pulls the text for the shopLoc <th> from the universal.shops[i].locations array
               shopLoc.appendChild(locName);
 
-          // creates the colHead <tr> and puts it in <thead>
-          var colHead = document.createElement("tr");
+          var colHead = document.createElement("tr"); // creates the colHead <tr> and puts it in <thead>
             tblHead.appendChild(colHead);
 
-            // creates the <th>s in the colHead <tr>
             for (j = 0; j < colHeadings.length; j++) { // creates as many columns as there are colHeadings
 
-              // creates the <th>s in the colHead <tr>
-              var colTitle = document.createElement("th");
+              var colTitle = document.createElement("th"); // creates the <th>s in the colHead <tr>
+
                   colHead.appendChild(colTitle);
 
-                  // pulls the text for the colTitle <th> from the universal.colHeadings array
-                  var colName = document.createTextNode(colHeadings[j]);
+                  var colName = document.createTextNode(colHeadings[j]); // pulls the text for the colTitle <th> from the universal.colHeadings array
                   colTitle.appendChild(colName);
 
             } // closes for (j) loop
@@ -246,7 +252,7 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
           // creating all cells within the <tbody>
           for (k = 0; k < timeBlocks.length; k++) { // creates as many rows as there are timeBlocks
 
-            var numDriversText = document.createTextNode(my.drivers(k)); // this has to be called here so that all sections that follow have numbers generate for them to fill in.
+            var numDriversText = document.createTextNode(my.drivers(shops[i])); // this has to be called here so that all sections that follow have numbers generate for them to fill in.
 
             // creates a <tr> and adds it to <tbody>
             var row = document.createElement("tr");
@@ -262,11 +268,10 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
               var numPizzas = document.createElement("td");
 
               numPizzas.className = 'pizzaResults';
-
-              var numPizzasText = document.createTextNode(shopTotal);
+              var numPizzasText = document.createTextNode(allShopTotals);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
-              countArray.push(shopTotal);
+              countArray.push(allShopTotals);
 
               // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
               var numDeliveries = document.createElement("td");
