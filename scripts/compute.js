@@ -42,12 +42,13 @@ function allTest() { // will search all times at all stores, 100x tests each
 /*********************** "OUTSIDE" VARIABLES & FUNCTIONS **********************/
 /******************************************************************************/
 
-function createShop(location, address, cityState, pieRange, delRange) {
-  this.location = location;
+function createShop(name, address, cityState, pieRange, delRange, dailyTotal) {
+  this.name = name;
   this.address = address;
   this.cityState = cityState;
   this.pieRange = pieRange;
   this.delRange = delRange;
+  this.dailyTotal = dailyTotal;
 }
 function random(min,max) {
   var randomResult = Math.floor(Math.random() * ((max - min) + 1) + min);
@@ -59,42 +60,48 @@ var beaverton = new createShop (
   "620 Olney Avenue",
   "Beaverton, OR",
   [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
-  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]]
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]],
+  []
 );
 var hillsboro = new createShop (
   "Hillsboro",
   "6715 SE 1st Avenue",
   "Hillsboro, OR",
   [[1,3],[1,3],[1,3],[5,9],[5,9],[5,9],[2,13],[2,13],[2,13],[18,32],[18,32],[18,32],[1,3],[1,3],[1,3],[8,20],[8,20],[8,20]],
-  [[1,7],[1,7],[1,7],[2,8],[2,8],[2,8],[1,6],[1,6],[1,6],[3,9],[3,9],[3,9],[5,12],[5,12],[5,12],[6,16],[6,16],[6,16]]
+  [[1,7],[1,7],[1,7],[2,8],[2,8],[2,8],[1,6],[1,6],[1,6],[3,9],[3,9],[3,9],[5,12],[5,12],[5,12],[6,16],[6,16],[6,16]],
+  []
 );
 var downtown = new createShop (
   "Downtown",
   "770 W Burnside",
   "Portland, OR",
   [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[10,26],[10,26],[10,26],[8,22],[8,22],[8,22],[0,2],[0,2],[0,2]],
-  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[4,6],[4,6],[4,6],[7,15],[7,15],[7,15],[2,8],[2,8],[2,8]]
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[4,6],[4,6],[4,6],[7,15],[7,15],[7,15],[2,8],[2,8],[2,8]],
+  []
 );
 var northeast = new createShop (
   "Northeast",
   "215 Broadway Street",
   "Portland, OR",
   [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[5,15],[5,15],[5,15],[25,39],[25,39],[25,39],[22,36],[22,36],[22,36],[5,21],[5,21],[5,21]],
-  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[13,18],[13,18],[13,18],[5,22],[5,22],[5,22],[16,31],[16,31],[16,31]]
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[13,18],[13,18],[13,18],[5,22],[5,22],[5,22],[16,31],[16,31],[16,31]],
+  []
 );
 var clackamas = new createShop (
   "Clackamas",
   "51511 SE 2nd Street",
   "Clackamas, OR",
   [[2,7],[2,7],[2,7],[3,8],[3,8],[3,8],[1,5],[1,5],[1,5],[5,13],[5,13],[5,13],[22,41],[22,41],[22,41],[15,20],[15,20],[15,20]],
-  [[3,5],[3,5],[3,5],[3,9],[3,9],[3,9],[1,4],[1,4],[1,4],[2,4],[2,4],[2,4],[15,42],[15,42],[15,42],[6,21],[6,21],[6,21]]
+  [[3,5],[3,5],[3,5],[3,9],[3,9],[3,9],[1,4],[1,4],[1,4],[2,4],[2,4],[2,4],[15,42],[15,42],[15,42],[6,21],[6,21],[6,21]],
+  []
 );
 var airport = new createShop (
   "Airport",
   "78 E. Harbor Street",
   "Portland, OR",
   [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[6,9],[6,9],[6,9],[4,8],[4,8],[4,8],[2,4],[2,4],[2,4]],
-  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[5,18],[5,18],[5,18],[2,5],[2,5],[2,5],[3,11],[3,11],[3,11]]
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[5,18],[5,18],[5,18],[2,5],[2,5],[2,5],[3,11],[3,11],[3,11]],
+  []
 );
 
 var colHeadings = ["Time", "# Pizzas", "# Deliveries", "# Drivers"];
@@ -102,56 +109,67 @@ var timeBlocks = ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 
 var shops = [beaverton, hillsboro, downtown, northeast, clackamas, airport];
 var countArray = [];
 var perShopTotal = [];
-var allShopTotal = [];
-var pizzaShopTotals = [];
+var allShopTotals = [];
 
-var pizzaResult;
+var shopTotal;
 var deliveryResult;
 var driversResult;
 var wrapper;
-
-function random(min,max) {
-  var randomResult = Math.floor(Math.random() * ((max - min) + 1) + min);
-  return randomResult;
-}
 
 /******************************************************************************/
 /************************** HERE LIES MY FRUSTRATION **************************/
 /******************************************************************************/
 
-// THIS WAS THE ORIGNAL IDEA I HAD FOR HOW TO ACCOMPLISH THIS WITH PULLING THE PIERANGE AND DELRANGE FROM MY CONSTRUCTORS OBJECTS
+// function pizzas(location) {
+//   var pizzaResult = [];
+//   var min;
+//   var max;
+//     for (y = 0; y < timeBlocks.length; y++) {
+//       min = location.pieRange[y][0];
+//       max = location.pieRange[y][1];
+//       pizzaResult.push(random(min, max));
+//     }
+//     var shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+//     return shopTotal;
+// }
+// for(var x = 0; x < shops.length; x++) {
+//   console.log("daily total: ", pizzas(shops[x]));
+//   allShopTotals.push(pizzas(shops[x]));
+// }
+// console.log(allShopTotals);
 
-
-var pizzaResult = [];
-function pizzas(location) {
-  // for (x = 0; x < shops.length; x++) { // repeat for each shop
-    for (y = 0; y < timeBlocks.length; y++) { // repeat for each row
-      var pizzaTotal;
-
-      var min = location.pieRange[y][0]; //**refactor here to take individual shops
-      var max = location.pieRange[y][1]; //**refactor here to take individual shops
-
-      // console.log(min,max);
-
-      pizzaResult.push(random(min, max)) ;
-
-    } // close the y loop
-
-  // } // close the x loop
-} // close the pizzas function
-
-for (var jj = 0; jj < shops.length; jj++) {
-  pizzas(shops[jj])
-  console.log(pizzaResult);
-}
- var shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
- // console.log("Shop Total: " +  shopTotal);
- // allShopTotal.push(shopTotal);
- // console.log(allShopTotal);
-
-
-
-// pizzas(shops[0])
+// add an array to each object to collect the per hour loops, and store those shop totals to one array in the object then switch the order of the loops when we append to the page to get the per hour totals across all stores
+// for (x = 0; x < shops.length; x++) {
+//
+//   function pizzas(location) { // should find the total per shop and push that to an  array
+//
+//       var pizzaResult;
+//       var shopTotal;
+//       var min;
+//       var max;
+//
+//       for (y = 0; y < timeBlocks.length; y++) { // repeat for each row in a table
+//
+//         var min = location.pieRange[y][0];
+//         var max = location.pieRange[y][1];
+//         shopTotal = random(min,max);
+//         location.dailyTotal.push(shopTotal);
+//         // console.log("per hour pizza: " + shopTotal);
+//         var perShopTotal = location.dailyTotal.reduce(function(a,b) {return a+b;});
+//       } // close the y loop
+//
+//       console.log("total per hour pizzas for this shop: " + perShopTotal);
+//
+//   } // close the pizzas function
+//     allShopTotals.push(pizzas(shops[0]));
+//   console.log("see allShopTotals: " + allShopTotals);
+//
+//   // allShopTotals.push(pizzas(shops[x]));
+//
+// } // close the x loop
+//
+// // console.log("Double Check: " + allShopTotals);
+// pizzas(shops[0]);
 
 // ANOTHER IDEA, TRYING TO TAKE SOME OF THE LOOPS OUT OF THE FUNCTION...
 
@@ -177,7 +195,7 @@ for (var jj = 0; jj < shops.length; jj++) {
 //     for (y = 0; y < timeBlocks.length; y++) { // repeats along all the rows of a single table, push all those values to a storeTotal array, reduce that array and save to a new array that will store all store totals together
 //       this.pizza(x,y);
 //
-//       return pizzaShopTotals;
+//       return ___;
 //     }
 //   },
 // }
@@ -190,37 +208,47 @@ for (var jj = 0; jj < shops.length; jj++) {
 /****************************** OLD CALCULATIONS ******************************/
 /******************************************************************************/
 
-pieRange = [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]];
-delRange = [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]];
+// pieRange = [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]];
+// delRange = [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]];
 
 var my = {
-  pizzas : function(x) {
-    pizzaResult = random(pieRange[x][0],pieRange[x][1]);
-    // console.log("# Pizzas: " + pizzaResult);
-    return pizzaResult;
+  pizzas : function(shopLocation) {
+    var shopTotal = [];
+    var pizzaResult = [];
+    var min;
+    var max;
+      for (y = 0; y < timeBlocks.length; y++) {
+        // console.log("min ",shopLocation.pieRange[y][0]);
+        // console.log("max ",shopLocation.pieRange[y][1]);
+        min = shopLocation.pieRange[y][0];
+        max = shopLocation.pieRange[y][1];
+        pizzaResult.push(random(min, max));
+      }
+      shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+      return shopTotal;
   },
   deliveries : function(y) {
     this.pizzas(y);
     // console.log("# Potential Deliveries: " + delRange[y][1]);
     deliveryResult = 0;
-    if (pizzaResult == 0) { // when pizza = 0, make the deliveries needed 0
+    if (shopTotal == 0) { // when pizza = 0, make the deliveries needed 0
       deliveryResult = 0;
       // console.warn("# DELIVERIES MODIFIED: when pizza = 0, deliveries = 0");
       return deliveryResult;
     }
     // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
-    else if (delRange[y][1] > pizzaResult) {
-      deliveryResult = random(1, pizzaResult);
+    else if (delRange[y][1] > shopTotal) {
+      deliveryResult = random(1, shopTotal);
       // console.warn("# DELIVERIES MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
       return deliveryResult;
     }
     // if there are more than zero pizzas, make sure the delivery minimum is at least one
-    else if (pizzaResult > 0) {
-      deliveryResult = random(1, pizzaResult);
+    else if (shopTotal > 0) {
+      deliveryResult = random(1, shopTotal);
       // console.warn("# DELIVERIES MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
       return deliveryResult;
     }
-    else if (deliveryResult > pizzaResult) {
+    else if (deliveryResult > shopTotal) {
       confirm("ruh roh shaggy, there are too many deliveries!");
     }
     else {
@@ -240,6 +268,14 @@ var my = {
     return driversResult;
   }
 };
+
+for(var x = 0; x < shops.length; x++) {
+  console.log("daily total: ", my.pizzas(shops[x]));
+  allShopTotals.push(my.pizzas(shops[x]));
+}
+console.log(allShopTotals);
+
+
 
 /******************************************************************************/
 /************************* APPENDING DATA TO THE PAGE *************************/
@@ -273,7 +309,7 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
             shopHead.appendChild(shopLoc);
 
               // pulls the text for the shopLoc <th> from the universal.shops[i].locations array
-              var locName = document.createTextNode(shops[i].location);
+              var locName = document.createTextNode(shops[i].name);
               shopLoc.appendChild(locName);
 
           // creates the colHead <tr> and puts it in <thead>
@@ -317,10 +353,10 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
 
               numPizzas.className = 'pizzaResults';
 
-              var numPizzasText = document.createTextNode(pizzaResult);
+              var numPizzasText = document.createTextNode(shopTotal);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
-              countArray.push(pizzaResult);
+              countArray.push(shopTotal);
 
               // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
               var numDeliveries = document.createElement("td");
@@ -353,7 +389,7 @@ if( document.getElementById("counterSpan") ) {
   counterOutput.textContent = myTotal;
 }
 
-console.log("Weekly All-Shop Total: " + myTotal);
+// console.log("Weekly All-Shop Total: " + myTotal);
 
 /******************************************************************************/
 /*********************************** THE END **********************************/
