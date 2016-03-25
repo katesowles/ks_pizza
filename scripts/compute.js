@@ -1,99 +1,197 @@
-var pizzaResult;
-var deliveryResult;
-var driversResult;
-// var pizzaCounter = 0;
-var pizzaCounter = 0;
-var countArray = [];
-var wrapper;
+/******************************************************************************/
+/************************************ TESTS ***********************************/
+/******************************************************************************/
 
+function lengthTest() {
+  console.log("---------------------- START TESTING ---------------------");
+  console.log("number of items in the location array: " + universal.shops.length);
+  console.log("number of items in the colHeadings array: " + universal.colHeadings.length);
+  console.log("number of items in the timeBlocks array: " + universal.timeBlocks.length);
+  console.log("---------------------- END TESTING -----------------------");
+}
+function storeTest(x) {
+
+  for (y = 0; y < universal.timeBlocks.length; y++) { // repeat for each row
+    var checkPieRange = [universal.shops[x].pieRange[y][0],universal.shops[x].pieRange[y][1]];
+    var checkPieRandom = random(universal.shops[x].pieRange[y][0],universal.shops[x].pieRange[y][1]);
+    if (checkPieRandom > universal.shops[x].pieRange[y][1]) {
+      console.alert("your pizza count is higher than the maximum");
+    }
+    else if (checkPieRandom < universal.shops[x].pieRange[y][0]) {
+      console.alert("your pizza count is less than the minimum");
+    }
+    else {
+      console.log("all is well.");
+    }
+  }
+}
+function allTest() { // will search all times at all stores, 100x tests each
+  for (z = 0; z < 1000; z++) {
+    for (x = 0; x < universal.shops.length; x++) { // repeat for each store
+      storeTest(x) // calls the store test which will search every time block
+    }
+  }
+  return "TESTING COMPLETE, AS YOU WERE..."
+}
+
+/******************************************************************************/
+/*********************** "OUTSIDE" VARIABLES & FUNCTIONS **********************/
+/******************************************************************************/
+
+function createShop(name, address, cityState, pieRange, delRange, dailyTotal) {
+  this.name = name;
+  this.address = address;
+  this.cityState = cityState;
+  this.pieRange = pieRange;
+  this.delRange = delRange;
+  this.dailyTotal = dailyTotal;
+}
 function random(min,max) {
   var randomResult = Math.floor(Math.random() * ((max - min) + 1) + min);
   return randomResult;
 }
 
-var shops = {
-  colHeadings : ["Time", "# Pizzas", "# Deliveries", "# Drivers"],
-  timeBlocks : ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 11:59am", "12:00 - 12:59pm", "1:00 - 1:59pm", "2:00 - 2:59pm", "3:00 - 3:59pm", "4:00 - 4:59pm", "5:00 - 5:59pm", "6:00 - 6:59pm", "7:00 - 7:59pm", "8:00 - 8:59pm", "9:00 - 9:59pm", "10:00 - 10:59pm", "11:00 - 11:59pm", "12:00 - 12:59am", "1:00 - 1:59am"],
-  location : ["Beaverton", "Hillsboro", "Downtown", "Northeast", "Clackamas", "Airport"],
-  pieRange : [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
-  delRange : [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]],
-};
+var beaverton = new createShop (
+  "Beaverton",
+  "620 Olney Avenue",
+  "Beaverton, OR",
+  [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]],
+  []
+);
+var hillsboro = new createShop (
+  "Hillsboro",
+  "6715 SE 1st Avenue",
+  "Hillsboro, OR",
+  [[1,3],[1,3],[1,3],[5,9],[5,9],[5,9],[2,13],[2,13],[2,13],[18,32],[18,32],[18,32],[1,3],[1,3],[1,3],[8,20],[8,20],[8,20]],
+  [[1,7],[1,7],[1,7],[2,8],[2,8],[2,8],[1,6],[1,6],[1,6],[3,9],[3,9],[3,9],[5,12],[5,12],[5,12],[6,16],[6,16],[6,16]],
+  []
+);
+var downtown = new createShop (
+  "Downtown",
+  "770 W Burnside",
+  "Portland, OR",
+  [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[10,26],[10,26],[10,26],[8,22],[8,22],[8,22],[0,2],[0,2],[0,2]],
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[4,6],[4,6],[4,6],[7,15],[7,15],[7,15],[2,8],[2,8],[2,8]],
+  []
+);
+var northeast = new createShop (
+  "Northeast",
+  "215 Broadway Street",
+  "Portland, OR",
+  [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[5,15],[5,15],[5,15],[25,39],[25,39],[25,39],[22,36],[22,36],[22,36],[5,21],[5,21],[5,21]],
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[13,18],[13,18],[13,18],[5,22],[5,22],[5,22],[16,31],[16,31],[16,31]],
+  []
+);
+var clackamas = new createShop (
+  "Clackamas",
+  "51511 SE 2nd Street",
+  "Clackamas, OR",
+  [[2,7],[2,7],[2,7],[3,8],[3,8],[3,8],[1,5],[1,5],[1,5],[5,13],[5,13],[5,13],[22,41],[22,41],[22,41],[15,20],[15,20],[15,20]],
+  [[3,5],[3,5],[3,5],[3,9],[3,9],[3,9],[1,4],[1,4],[1,4],[2,4],[2,4],[2,4],[15,42],[15,42],[15,42],[6,21],[6,21],[6,21]],
+  []
+);
+var airport = new createShop (
+  "Airport",
+  "78 E. Harbor Street",
+  "Portland, OR",
+  [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[6,9],[6,9],[6,9],[4,8],[4,8],[4,8],[2,4],[2,4],[2,4]],
+  [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[5,18],[5,18],[5,18],[2,5],[2,5],[2,5],[3,11],[3,11],[3,11]],
+  []
+);
+
+var colHeadings = ["Time", "# Pizzas", "# Deliveries", "# Drivers"];
+var timeBlocks = ["8:00 - 8:59am", "9:00 - 9:59am", "10:00 - 10:59am", "11:00 - 11:59am", "12:00 - 12:59pm", "1:00 - 1:59pm", "2:00 - 2:59pm", "3:00 - 3:59pm", "4:00 - 4:59pm", "5:00 - 5:59pm", "6:00 - 6:59pm", "7:00 - 7:59pm", "8:00 - 8:59pm", "9:00 - 9:59pm", "10:00 - 10:59pm", "11:00 - 11:59pm", "12:00 - 12:59am", "1:00 - 1:59am"];
+var shops = [beaverton, hillsboro, downtown, northeast, clackamas, airport];
+var countArray = [];
+var allShopTotals = [];
+var shopTotal = [];
+var pizzaResult = [];
+
+var deliveryResult;
+var driversResult;
+var wrapper;
+var min;
+var max;
+
+/******************************************************************************/
+/************************** HERE LIES MY FRUSTRATION **************************/
+/******************************************************************************/
+
+// pieRange = [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]];
+// delRange = [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]];
 
 var my = {
-  pizzas : function(x) {
-    pizzaResult = random(shops.pieRange[x][0],shops.pieRange[x][1]);
-    // console.log("# Pizzas: " + pizzaResult);
-    return pizzaResult;
+  pizzas : function(shopLocation) {
+    var shopTotal = [];
+    var pizzaResult = [];
+    var min;
+    var max;
+      for (y = 0; y < timeBlocks.length; y++) {
+        // console.log("min ",shopLocation.pieRange[y][0]);
+        // console.log("max ",shopLocation.pieRange[y][1]);
+        min = shopLocation.pieRange[y][0];
+        max = shopLocation.pieRange[y][1];
+        pizzaResult.push(random(min, max));
+      }
+      shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
+      return shopTotal;
   },
   deliveries : function(y) {
     this.pizzas(y);
-    // console.log("# Pizzas: " + pizzaResult);
-    // console.log("Potential Deliveries: " + shops.delRange[y][1]);
+    // console.log("# Potential Deliveries: " + delRange[y][1]);
     deliveryResult = 0;
-    if (pizzaResult == 0) { // when pizza = 0, make the deliveries needed 0
+    if (shopTotal == 0) { // when pizza = 0, make the deliveries needed 0
       deliveryResult = 0;
-      // console.log("MODIFIED: when pizza = 0, deliveries = 0");
+      // console.warn("# DELIVERIES MODIFIED: when pizza = 0, deliveries = 0");
       return deliveryResult;
     }
     // if the max number of deliveries is higher (but not equal to) than the number of pizzas baked, cap the number of deliveries at # pizzas.
-    else if (shops.delRange[y][1] > pizzaResult) {
-      deliveryResult = random(1, pizzaResult);
-      // console.log("MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
+    else if (delRange[y][1] > shopTotal) {
+      deliveryResult = random(1, shopTotal);
+      // console.warn("# DELIVERIES MODIFIED: fewer pizzas than deliveries made, cap deliveries: " + deliveryResult);
       return deliveryResult;
     }
     // if there are more than zero pizzas, make sure the delivery minimum is at least one
-    else if (pizzaResult > 0) {
-      deliveryResult = random(1, pizzaResult);
-      // console.log("MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
+    else if (shopTotal > 0) {
+      deliveryResult = random(1, shopTotal);
+      // console.warn("# DELIVERIES MODIFIED: has pizza but min delivery is 0, new min of 1 delivery: " + deliveryResult);
       return deliveryResult;
     }
-    else if (deliveryResult > pizzaResult) {
-      console.error("ruh roh shaggy, there are too many deliveries!");
+    else if (deliveryResult > shopTotal) {
+      confirm("ruh roh shaggy, there are too many deliveries!");
     }
     else {
-      console.error("the fuck did you do?");
+      confirm("the fuck did you do?");
     }
     return deliveryResult;
   },
   drivers : function(z) {
-    // pizzaResult;
-    // deliveryResult;
     this.pizzas(z);
     this.deliveries(z);
     driversResult = 0;
     // console.log("# Pizzas: " + pizzaResult);
     // console.log("# Deliveries: " + deliveryResult);
     driversResult = Math.ceil(deliveryResult / 3);
-    // console.log("DRIVER RESULT: " + driversResult);
+    // console.log("# Drivers: " + driversResult);
+    // console.log("----------------------------------------");
     return driversResult;
   }
 };
 
-// console.log("---------------------- START TESTING ---------------------");
-// console.log("BLOCK ONE Pizza Min/Max (should be between 0-4):    " + random(shops.pieRange[0][0],shops.pieRange[0][1]));
-// console.log("BLOCK ONE Delivery Min/Max (should be between 0-4): " + random(shops.delRange[0][0],shops.delRange[0][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK TWO Pizza Min/Max (should be between 0-7):    " + random(shops.pieRange[1][0],shops.pieRange[1][1]));
-// console.log("BLOCK TWO Delivery Min/Max (should be between 0-4): " + random(shops.delRange[1][0],shops.delRange[1][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK THREE Pizza Min/Max (should be between 2-15):   " + random(shops.pieRange[2][0],shops.pieRange[2][1]));
-// console.log("BLOCK THREE Delivery Min/Max (should be between 1-4): " + random(shops.delRange[2][0],shops.delRange[2][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK FOUR Pizza Min/Max (should be between 15-35):  " + random(shops.pieRange[3][0],shops.pieRange[3][1]));
-// console.log("BLOCK FOUR Delivery Min/Max (should be between 3-8): " + random(shops.delRange[3][0],shops.delRange[3][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK FIVE Pizza Min/Max (should be between 12-31):   " + random(shops.pieRange[4][0],shops.pieRange[4][1]));
-// console.log("BLOCK FIVE Delivery Min/Max (should be between 5-12): " + random(shops.delRange[4][0],shops.delRange[4][1]));
-// console.log("----------------------------------------------------------");
-// console.log("BLOCK SIX Pizza Min/Max (should be between 5-20):    " + random(shops.pieRange[5][0],shops.pieRange[5][1]));
-// console.log("BLOCK SIX Delivery Min/Max (should be between 6-11): " + random(shops.delRange[5][0],shops.delRange[5][1]));
-// console.log("---------------------- END TESTING -----------------------");
-// console.log("number of items in the location array: " + shops.location.length);
-// console.log("number of items in the colHeadings array: " + shops.colHeadings.length);
-// console.log("number of items in the timeBlocks array: " + shops.timeBlocks.length);
-// console.log("----------------------------------------------------------");
+for(var x = 0; x < shops.length; x++) {
+  console.log("daily total: ", my.pizzas(shops[x]));
+  allShopTotals.push(my.pizzas(shops[x]));
+}
+console.log(allShopTotals);
 
-for (i = 0; i < shops.location.length; i++) {
+
+
+/******************************************************************************/
+/************************* APPENDING DATA TO THE PAGE *************************/
+/******************************************************************************/
+
+for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop objects
 
   function generate_table() {
 
@@ -120,8 +218,8 @@ for (i = 0; i < shops.location.length; i++) {
             shopLoc.setAttribute("colspan", "4");
             shopHead.appendChild(shopLoc);
 
-              // pulls the text for the shopLoc <th> from the shops.locations array
-              var locName = document.createTextNode(shops.location[i]);
+              // pulls the text for the shopLoc <th> from the universal.shops[i].locations array
+              var locName = document.createTextNode(shops[i].name);
               shopLoc.appendChild(locName);
 
           // creates the colHead <tr> and puts it in <thead>
@@ -129,14 +227,14 @@ for (i = 0; i < shops.location.length; i++) {
             tblHead.appendChild(colHead);
 
             // creates the <th>s in the colHead <tr>
-            for (j = 0; j < shops.colHeadings.length; j++) {
+            for (j = 0; j < colHeadings.length; j++) { // creates as many columns as there are colHeadings
 
               // creates the <th>s in the colHead <tr>
               var colTitle = document.createElement("th");
                   colHead.appendChild(colTitle);
 
-                  // pulls the text for the colTitle <th> from the shops.colheadings array
-                  var colName = document.createTextNode(shops.colHeadings[j]);
+                  // pulls the text for the colTitle <th> from the universal.colHeadings array
+                  var colName = document.createTextNode(colHeadings[j]);
                   colTitle.appendChild(colName);
 
             } // closes for (j) loop
@@ -146,9 +244,9 @@ for (i = 0; i < shops.location.length; i++) {
           tbl.appendChild(tblBody);
 
           // creating all cells within the <tbody>
-          for (k = 0; k < shops.timeBlocks.length; k++) {
+          for (k = 0; k < timeBlocks.length; k++) { // creates as many rows as there are timeBlocks
 
-            var numDriversText = document.createTextNode(my.drivers(k));
+            var numDriversText = document.createTextNode(my.drivers(k)); // this has to be called here so that all sections that follow have numbers generate for them to fill in.
 
             // creates a <tr> and adds it to <tbody>
             var row = document.createElement("tr");
@@ -156,21 +254,19 @@ for (i = 0; i < shops.location.length; i++) {
 
               // creates the timeCell <td> and adds it the <tr> (this is the first TIME column)
               var timeCell = document.createElement("td");
-              var timeCellText = document.createTextNode(shops.timeBlocks[k]);
+              var timeCellText = document.createTextNode(timeBlocks[k]);
               timeCell.appendChild(timeCellText);
               row.appendChild(timeCell);
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
+
               numPizzas.className = 'pizzaResults';
-              pizzaCounter = pizzaResult;
-              var numPizzasText = document.createTextNode(pizzaResult);
+
+              var numPizzasText = document.createTextNode(shopTotal);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
-
-              countArray.push(pizzaResult);
-
-              // console.log(pizzaResult);
+              countArray.push(shopTotal);
 
               // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
               var numDeliveries = document.createElement("td");
@@ -178,26 +274,33 @@ for (i = 0; i < shops.location.length; i++) {
               numDeliveries.appendChild(numDeliveriesText);
               row.appendChild(numDeliveries);
 
-              // console.log(deliveryResult);
-
               // creates the numDrivers <td> and adds it the <tr> (this is the fourth #Drivers column)
               var numDrivers = document.createElement("td");
               // var numDriversText = document.createTextNode(my.drivers(i));
               numDrivers.appendChild(numDriversText);
               row.appendChild(numDrivers);
 
-          };
+          }; // closes the k loop
 
-};
+  }; // closes the generate_table function
 
-generate_table();
-};
+  generate_table();
 
-console.log(countArray);
+}; // closes the i loop
+
+/******************************************************************************/
+/************************ ADDING MYTOTAL TO COUNTERSPAN ***********************/
+/******************************************************************************/
+
 var myTotal = countArray.reduce(function(a,b) {return a+b;});
-console.log(myTotal);
 
 var counterOutput = document.getElementById("counterSpan");
 if( document.getElementById("counterSpan") ) {
   counterOutput.textContent = myTotal;
 }
+
+// console.log("Weekly All-Shop Total: " + myTotal);
+
+/******************************************************************************/
+/*********************************** THE END **********************************/
+/******************************************************************************/
