@@ -119,8 +119,7 @@ var max;                //
 /************************** HERE LIES MY FRUSTRATION **************************/
 /******************************************************************************/
 
-var my = {
-  pizzas : function(shopLocation) { // shopLocation = shops[x]
+pizzas = function(shopLocation) { // shopLocation = shops[x]
     var shopTotal = [];
     var pizzaResult = [];
     var min;
@@ -133,10 +132,9 @@ var my = {
       shopTotal = pizzaResult.reduce(function(a,b) {return a+b;});
       console.log("shop total: " + shopTotal);
       return shopTotal;
-  },
-  deliveries : function(shopLocation) {
-    this.pizzas(shopLocation);
-
+}
+deliveries = function(shopLocation) {
+    pizzas(shopLocation);
     for (f = 0; f < timeBlocks.length; f++) {
       deliveryResult = 0;
       if (shopTotal == 0) { // when pizza = 0, make the deliveries needed 0
@@ -162,11 +160,10 @@ var my = {
       }
       return deliveryResult;
     }
-
-  },
-  drivers : function(shopLocation) {
-    this.pizzas(shopLocation);
-    this.deliveries(shopLocation);
+}
+drivers = function(shopLocation) {
+    pizzas(shopLocation);
+    deliveries(shopLocation);
     driversResult = 0;
     // console.log("# Pizzas: " + pizzaResult);
     // console.log("# Deliveries: " + deliveryResult);
@@ -174,11 +171,10 @@ var my = {
     // console.log("# Drivers: " + driversResult);
     // console.log("----------------------------------------");
     return driversResult;
-  }
-};
+}
 
 for(var x = 0; x < shops.length; x++) {
-  allShopTotals.push(my.pizzas(shops[x]));
+  allShopTotals.push(pizzas(shops[x]));
 }
 
 // wtf = function(shopLocation) { // shopLocation = shops[x]
@@ -252,7 +248,7 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
           // creating all cells within the <tbody>
           for (k = 0; k < timeBlocks.length; k++) { // creates as many rows as there are timeBlocks
 
-            var numDriversText = document.createTextNode(my.drivers(shops[i])); // this has to be called here so that all sections that follow have numbers generate for them to fill in.
+            var numDriversText = document.createTextNode(drivers(shops[i])); // this has to be called here so that all sections that follow have numbers generate for them to fill in.
 
             // creates a <tr> and adds it to <tbody>
             var row = document.createElement("tr");
@@ -266,12 +262,11 @@ for (i = 0; i < shops.length; i++) { // creates as many tables as there are shop
 
               // creates the numPizza <td> and adds it the <tr> (this is the second #Pizza column)
               var numPizzas = document.createElement("td");
-
               numPizzas.className = 'pizzaResults';
-              var numPizzasText = document.createTextNode(allShopTotals);
+              var numPizzasText = document.createTextNode(pizzaResult);
               numPizzas.appendChild(numPizzasText);
               row.appendChild(numPizzas);
-              countArray.push(allShopTotals);
+              countArray.push(pizzaResult);
 
               // creates the numDeliveries <td> and adds it the <tr> (this is the third #Deliveries column)
               var numDeliveries = document.createElement("td");
