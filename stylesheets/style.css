@@ -10,7 +10,7 @@ body {
   color: #333;
 }
 
-body#home #tableWrapper {
+body#home #tableWrapper, body#salesData #counterSpan {
   display: none;
 }
 
@@ -159,6 +159,12 @@ table {
 
 table:last-child {
   margin-bottom: 0px;
+  background-color: #aaa;
+  color: white;
+}
+
+table:last-child tbody tr:nth-child(even) {
+  background-color: #ccc;
 }
 
 th {
@@ -200,6 +206,13 @@ td:last-child, th:last-child {
 
 tr:last-child td {
   border-bottom: none;
+}
+
+tfoot tr th {
+  border-bottom: none;
+  font-size: 24px;
+  text-transform: uppercase;
+  padding-top: 10px;
 }
 
 nav {
