@@ -1,24 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Pizza3001 - Sales Data</title>
-    <link rel="stylesheet" href="stylesheets/style.css">
-    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic|Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-  </head>
-  <body id="salesData">
-    <header>
-      <h1>Sales Data</h1>
-    </header>
-    <div id="tableWrapper">
-      <!-- the table will go here -->
-    </div>
-    <div id="counterSpan"></div>
-    <footer>
-      <nav>
-        <a href="index.html" class="btn">Go Home</a>
-      </nav>
-    </footer>
-    <script src="scripts/NewCompute.js"></script>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>Pizza3001 - Sales Data</title>
+        <link rel="stylesheet" href="stylesheets/style.css">
+        <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,400italic,700,700italic,900,900italic|Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    </head>
+    <body id="salesData">
+        <header>
+            <h1>Sales Data</h1>
+        </header>
+        <div id="formWrapper">
+            <form class="newTable" action="NewCompute.js" method="post">
+                <fieldset>
+                    <legend>Public Store Details</legend>
+                    <label for="name" class="title">Store Name:</label>
+                    <input type="text" name="name" placeholder="Beaverton" id="newShopLoc">
+                    <label for="streetAddress" class="title">Street Address:</label>
+                    <input type="text" name="streetAddress" placeholder="620 Olney Avenue" id="newShopAddress">
+                    <label for="cityState" class="title">City, State:</label>
+                    <input type="text" name="cityState" placeholder="Beaverton, OR" id="newShopCityState">
+                </fieldset>
+                <fieldset>
+                    <legend>Hourly Pizza Production Range</legend>
+                    <div class="headings">
+                        <div class="">Time Blocks</div>
+                        <div class="">Minimums</div>
+                        <div class="">Maximums</div>
+                    </div>
+                    <label for="blockOne" class="title">8am - 10:59am</label>
+                    <input type="text" name="pizzaBlockOneMin" class="min" placeholder="0" id="pizzaBlockOneMin">
+                    <input type="text" name="pizzaBlockOneMax" class="max" placeholder="4" id="pizzaBlockOneMax">
+                    <label for="blockTwo" class="title">11am - 1:59pm</label>
+                    <input type="text" name="pizzaBlockTwoMin" class="min" placeholder="0" id="pizzaBlockTwoMin">
+                    <input type="text" name="pizzaBlockTwoMax" class="max" placeholder="7" id="pizzaBlockTwoMax">
+                    <label for="blockThree" class="title">2pm - 4:59pm</label>
+                    <input type="text" name="pizzaBlockThreeMin" class="min" placeholder="2" id="pizzaBlockThreeMin">
+                    <input type="text" name="pizzaBlockThreeMax" class="max" placeholder="15" id="pizzaBlockThreeMax">
+                    <label for="blockFour" class="title">5pm - 7:59pm</label>
+                    <input type="text" name="pizzaBlockFourMin" class="min" placeholder="15" id="pizzaBlockFourMin">
+                    <input type="text" name="pizzaBlockFourMax" class="max" placeholder="35" id="pizzaBlockFourMax">
+                    <label for="blockFive" class="title">8pm - 10:59pm</label>
+                    <input type="text" name="pizzaBlockFiveMin" class="min" placeholder="12" id="pizzaBlockFiveMin">
+                    <input type="text" name="pizzaBlockFiveMax" class="max" placeholder="31" id="pizzaBlockFiveMax">
+                    <label for="blockSix" class="title">11pm - 1:59am</label>
+                    <input type="text" name="pizzaBlockSixMin" class="min" placeholder="5" id="pizzaBlockSixMin">
+                    <input type="text" name="pizzaBlockSixMax" class="max" placeholder="20" id="pizzaBlockSixMax">
+                </fieldset>
+                <fieldset>
+                    <legend>Hourly Delivery Ranges</legend>
+                    <div class="headings">
+                        <div class="">Time Blocks</div>
+                        <div class="">Minimums</div>
+                        <div class="">Maximums</div>
+                    </div>
+                    <label for="blockOne" class="title">8am - 10:59am</label>
+                    <input type="text" name="deliveryBlockOneMin" class="min" placeholder="0" id="deliveryBlockOneMin">
+                    <input type="text" name="deliveryBlockOneMax" class="max" placeholder="4" id="deliveryBlockOneMax">
+                    <label for="blockTwo" class="title">11am - 1:59pm</label>
+                    <input type="text" name="deliveryBlockTwoMin" class="min" placeholder="0" id="deliveryBlockTwoMin">
+                    <input type="text" name="deliveryBlockTwoMax" class="max" placeholder="4" id="deliveryBlockTwoMax">
+                    <label for="blockThree" class="title">2pm - 4:59pm</label>
+                    <input type="text" name="deliveryBlockThreeMin" class="min" placeholder="1" id="deliveryBlockThreeMin">
+                    <input type="text" name="deliveryBlockThreeMax" class="max" placeholder="4" id="deliveryBlockThreeMax">
+                    <label for="blockFour" class="title">5pm - 7:59pm</label>
+                    <input type="text" name="deliveryBlockFourMin" class="min" placeholder="3" id="deliveryBlockFourMin">
+                    <input type="text" name="deliveryBlockFourMax" class="max" placeholder="8" id="deliveryBlockFourMax">
+                    <label for="blockFive" class="title">8pm - 10:59pm</label>
+                    <input type="text" name="deliveryBlockFiveMin" class="min" placeholder="5" id="deliveryBlockFiveMin">
+                    <input type="text" name="deliveryBlockFiveMax" class="max" placeholder="12" id="deliveryBlockFiveMax">
+                    <label for="blockSix" class="title">11pm - 1:59am</label>
+                    <input type="text" name="deliveryBlockSixMin" class="min" placeholder="6" id="deliveryBlockSixMin">
+                    <input type="text" name="deliveryBlockSixMax" class="max" placeholder="11" id="deliveryBlockSixMax">
+                </fieldset>
+                <input type="button" id="submit" name="submit" value="Click to Submit" class="btn formSubmit">
+            </form>
+        </div>
+        <div id="tableWrapper">
+        <!-- the table will go here -->
+        </div>
+        <div id="counterSpan"></div>
+        <footer>
+            <nav>
+            <a href="index.html" class="btn">Go Home</a>
+            </nav>
+        </footer>
+        <script src="scripts/NewCompute.js"></script>
+    </body>
 </html>

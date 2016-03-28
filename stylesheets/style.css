@@ -1,229 +1,301 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Source Sans Pro", Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 
 body {
-  background-color: #eee;
-  color: #333;
+    background-color: #eee;
+    color: #333;
 }
 
 body#home #tableWrapper, body#salesData #counterSpan {
-  display: none;
+    display: none;
 }
 
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 25px;
-  background-color: rgba(255,255,255,0.9);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px;
+    background-color: rgba(255,255,255,0.9);
 }
 
 .bannerImage {
-  background-image: url('http://troppa-nl.com/wp-content/uploads/2015/08/pizza-stock.jpg') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
-  background-position: static;
-  background-size: cover;
-  height: 800px;
+    background-image: url('http://troppa-nl.com/wp-content/uploads/2015/08/pizza-stock.jpg') ; //http://sedonapizzacompany.com/wp-content/uploads/2015/04/Sedona-Pizza-Comp-1-HR.jpg
+    background-position: static;
+    background-size: cover;
+    height: 800px;
 }
 
 .overlay {
-  background-color: rgba(0,0,0,0.4);
-  height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    height: 100%;
 }
 
 .container, .locations {
-  padding: 50px;
+    padding: 50px;
 }
 
 .container {
-  padding-top: 250px;
-  width: 50%;
+    padding-top: 250px;
+    width: 50%;
 }
 
 .container p {
-  font-size: 80px;
-  font-weight: 800;
-  color: white;
-  text-transform: uppercase;
-  text-align: left;
-  line-height: 1.1em;
+    font-size: 80px;
+    font-weight: 800;
+    color: white;
+    text-transform: uppercase;
+    text-align: left;
+    line-height: 1.1em;
 }
 
 .container #counterSpan {
-  font-size: 120px;
-  display: block;
-  line-height: 1em;
-}
-
-.locations {
-  /*white-space: nowrap;*/
+    font-size: 120px;
+    display: block;
+    line-height: 1em;
 }
 
 .col6 {
-  width: 14.6%;
-  display: inline-block;
-  margin: 50px 1%;
-  text-align: center;
-  vertical-align: top;
-  position: relative;
+    width: 14.6%;
+    display: inline-block;
+    margin: 50px 1%;
+    text-align: center;
+    vertical-align: top;
+    position: relative;
 }
 
 .col6::before {
-  content: "";
-  background-image: url('../images/pin.png');
-  opacity: 0.6;
-  background-size: 30px auto;
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  top: -30px;
-  left: calc(50% - 15px);
-  z-index: 100;
+    content: "";
+    background-image: url('../images/pin.png');
+    opacity: 0.6;
+    background-size: 30px auto;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -30px;
+    left: calc(50% - 15px);
 }
 
 h1, h2, h3, h4, h5, h6 {
-  text-align: center;
+    text-align: center;
 }
 
 h1 {
-  font-size: 55px;
-  font-weight: 200;
-  line-height: 1em;
+    font-size: 55px;
+    font-weight: 200;
+    line-height: 1em;
 }
 
 h1 em {
-  font-weight: 400;
-  font-style: normal;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h2 {
-  font-size: 34px;
-  font-weight: 500;
-  line-height: 1em;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1em;
 }
 
 h3 {
-  font-size: 34px;
-  margin-bottom: 30px;
+    font-size: 34px;
+    margin-bottom: 30px;
 }
 
 h4 {
-  padding: 10px;
-  text-transform: uppercase;
-  background-color: rgba(152,204,0,.5);
-  width: 380px;
-  margin: 0 auto;
-  margin-bottom: 30px;
+    padding: 10px;
+    text-transform: uppercase;
+    background-color: rgba(152,204,0,.5);
+    width: 380px;
+    margin: 0 auto;
+    margin-bottom: 30px;
 }
 
 h6 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .btn {
-  display: block;
-  margin: 0 auto;
-  border: 2px solid #333;
-  border-radius: 20px;
-  padding: 8px 15px;
-  background-color: transparent;
-  font-weight: 400;
-  font-size: 16px;
-  transition: all 0.3s ease 0s;
-  margin-bottom: 50px;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 8px 15px;
+    background-color: transparent;
+    font-weight: 400;
+    font-size: 16px;
+    transition: all 0.3s ease 0s;
+    margin-bottom: 50px;
 }
 
 .btn:hover {
-  border-color: #999;
-  color: #999;
+    border-color: #999;
+    color: #999;
 }
 
-#tableWrapper {
-  width: 585px;
-  padding: 30px;
-  background-color: #fff;
-  margin: 200px auto 50px auto;
+#formWrapper, #tableWrapper {
+    width: 585px;
+    padding: 30px;
+    background-color: #fff;
+    margin: 50px auto 50px auto;
+}
+
+#formWrapper {
+    margin-top: 155px; /* header is currently 105px tall, bump it 50px below the bottom of the header */
+}
+
+form {
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 200;
+}
+
+fieldset {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.headings div {
+    display: inline-block;
+    margin-right: 20px;
+    width: 160px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.headings div:first-child {
+    width: 100px;
+    text-align: right;
+}
+
+.headings div:last-child {
+    margin-right: 0;
+}
+
+.noBorder {
+    width: 150px;
+    border: none;
+    display: inline-block;
+}
+
+input {
+    padding: 3px;
+    margin-bottom: 2px;
+}
+
+input.formSubmit {
+    width: 150px;
+    margin-bottom: 0px;
+}
+
+.min, .max {
+    display: inline-block;
+    width: 159px;
+}
+
+.min {
+    margin-right: 20px;
+}
+
+legend {
+    padding: 10px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+label.title {
+    width: 125px;
+    float: left;
+    text-align: right;
+    padding-right: 20px;
+}
+
+input {
+    width: calc(100% - 145px);
 }
 
 table {
-  border-collapse: collapse;;
-  border: none;
-  text-align: center;
-  min-width: 525px;
-  margin-bottom: 100px;
+    border-collapse: collapse;;
+    border: none;
+    text-align: center;
+    min-width: 525px;
+    margin-bottom: 100px;
 }
 
 table:last-child {
-  margin-bottom: 0px;
-  background-color: #aaa;
-  color: white;
+    margin-bottom: 0px;
+    background-color: #aaa;
+    color: white;
 }
 
 table:last-child tbody tr:nth-child(even) {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 th {
-  border-top: none;
-  border-left: none;
-  border-bottom: 1px solid #ddd;
-  border-right: 1px solid #ddd;
-  width: 125px;
-  font-size: 21px;
-  font-weight: 500;
+    border-top: none;
+    border-left: none;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    width: 125px;
+    font-size: 21px;
+    font-weight: 500;
 }
 
 thead tr:first-child th {
-  border-bottom: none;
-  font-size: 34px;
-  text-transform: uppercase;
-  padding-bottom: 10px;
+    border-bottom: none;
+    font-size: 34px;
+    text-transform: uppercase;
+    padding-bottom: 10px;
 }
 
 td {
-  border-right: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
-  font-size: 16px;
-  font-weight: 300;
-  width: 125px;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    font-weight: 300;
+    width: 125px;
 }
 
 td:first-child {
-  width: 150px;
+    width: 150px;
 }
 
 tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+    background-color: #f9f9f9;
 }
 
 td:last-child, th:last-child {
-  border-right: none;
+    border-right: none;
 }
 
 tr:last-child td {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 tfoot tr th {
-  border-bottom: none;
-  font-size: 24px;
-  text-transform: uppercase;
-  padding-top: 10px;
+    border-bottom: none;
+    font-size: 24px;
+    text-transform: uppercase;
+    padding-top: 10px;
 }
 
 nav {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 nav a {
-  text-align: center;
-  color: #333;
-  text-decoration: none;
-  width: 150px;
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+    width: 150px;
 }
 
 @media only screen and (max-width: 1600px) {
@@ -232,8 +304,8 @@ nav a {
         padding-top: 250px;
     }
     .col6 {
-      width: 30%;
-      margin: 50px 1.6%;
+        width: 30%;
+        margin: 50px 1.6%;
     }
 }
 
@@ -243,27 +315,26 @@ nav a {
         padding-top: 250px;
     }
     .col6 {
-      width: 40%;
-      margin: 50px 5%;
+        width: 40%;
+        margin: 50px 5%;
     }
 }
 
 @media only screen and (max-width: 700px) {
     .bannerImage {
-      height: 625px;
+        height: 625px;
     }
     .container {
         width: 100%;
         padding-top: 160px;
-
     }
     .container p {
-      font-size: 55px;
-      text-align: center;
+        font-size: 55px;
+        text-align: center;
     }
     .col6 {
-      width: 100%;
-      margin-left: 0px;
-      margin-right: 0px;
+        width: 100%;
+        margin-left: 0px;
+        margin-right: 0px;
     }
 }
