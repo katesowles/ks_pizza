@@ -96,11 +96,11 @@ function getHourlyDriverTotals(repeatByTimeBlock4) {
     }
 
 var beaverton = new Shop (
-"Beaverton",
-"620 Olney Avenue",
-"Beaverton, OR",
-[[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
-[[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]]
+    "Beaverton",
+    "620 Olney Avenue",
+    "Beaverton, OR",
+    [[0,4],[0,4],[0,4],[0,7],[0,7],[0,7],[2,15],[2,15],[2,15],[15,35],[15,35],[15,35],[12,31],[12,31],[12,31],[5,20],[5,20],[5,20]],
+    [[0,4],[0,4],[0,4],[0,4],[0,4],[0,4],[1,4],[1,4],[1,4],[3,8],[3,8],[3,8],[5,12],[5,12],[5,12],[6,11],[6,11],[6,11]]
 );
 var hillsboro = new Shop (
 "Hillsboro",
@@ -325,3 +325,31 @@ function generateHourlyTable() {
     }; // closes the repeatByTimeBlock loop
 
 } // closes the tableGenerator function
+
+/******************************************************************************/
+/**************** WHEREIN WE PUSH THE FORM CONTENT TO THE TABLE ***************/
+/******************************************************************************/
+
+var newStoreSubmission = document.getElementById("submit");
+
+newStoreSubmission.addEventListener("click", function () {
+
+    var newShopLoc = document.getElementById("newShopLoc").value;
+
+    var newStoreArray = [];
+
+    newStoreArray.push(newShopLoc);         // pushes shop location
+    newStoreArray.push(); // push shop address
+    newStoreArray.push(); // push shop city state
+    newStoreArray.push(); // push pizza min
+    newStoreArray.push(); // push pizza max
+    newStoreArray.push(); // push delivery min
+    newStoreArray.push(); // push delivery max
+
+    var userSubmittedStore = new Shop(newStoreArray[0], newStoreArray[1], newStoreArray[2], newStoreArray[3], newStoreArray[4], newStoreArray[5], newStoreArray[6])
+
+    // __.push(userSubmittedStore);
+    generateTable(userSubmittedStore);
+
+
+});
